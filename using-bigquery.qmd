@@ -1,0 +1,57 @@
+---
+title: Using BigQuery
+author: Jake Peters
+date-modified: Oct. 5, 2023
+---
+
+#### **Projects**
+
+##### dev
+
+##### stg
+
+##### prod
+
+#### **Tables**
+
+#### **Flattening**
+
+#### **Saved Queries**
+
+#### **Scheduled Queries**
+
+#### **Connecting to BigQuery in R**
+
+When connecting to BigQuery with R there are two main options.
+
+-   **bigrquery** allows you to download the data directly to your local machine once you are authenticated. You can then manipulate the data directly in R. This is not a very salable approach because the data is overgrowing.
+
+-   **DBI** allows you to establish a "connection" to a BigQuery table and run your data manipulations and filters directly in BigQuery. This is preferable with large data sets.
+
+**bigrquery example:**
+
+``` r
+library(bigrquery)
+library(glue)
+
+project <- 'nih-nci-dceg-connect-prod-6d04'
+dataset <- 'FlatConnect'
+table   <- 'participants_noPII_JP'
+sql     <- glue('SELECT * ',
+                'FROM `{project}.{dataset}.{table}` ',
+                'WHERE Connect_ID IS NOT NULL ',
+                'LIMIT 100')
+
+# Authenticate to BigQuery
+bigrquery::bq_auth()
+
+# Download data
+tb      <- bigrquery::bq_project_query(project, query=sql)
+data    <- bigrquery::bq_table_download(tb, 
+                                        bigint="integer64", 
+                                        page_size=1000)
+```
+
+**DBI example:**
+
+#### **Connecting to BigQuery in Python**

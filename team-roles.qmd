@@ -1,0 +1,33 @@
+---
+title: Team Roles
+author: Analytics Team
+date-modified: Oct. 5, 2023
+---
+
+#### Current Members
+
+-   Nicole, Lead Analyst:
+
+    -   The boss
+
+-   Jing, Senior Analyst:
+
+    -   
+
+-   Kelsey, Analyst:
+
+    -   
+
+-   Jake Peters, Data Scientist:
+
+    -   GCP Pipelines, Flattening/Data Modeling, Box automation
+
+-   Madhuri, Analytics Coordinator
+
+    -   
+
+-   Rebecca, Analyst:
+
+    -   
+
+#### Past Members

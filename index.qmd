@@ -1,0 +1,35 @@
+---
+title: "Welcome to the Analytics Team Wiki"
+---
+
+### Why a wiki?
+
+This wiki is intended to gather the wealth of institutional knowledge that we have developed on this team into a persistent resource. This is especially useful for on-boarding new members, training colleagues to cover us while on PTO and for developing some overlapping knowledge across roles. We can also use this wiki to develop shared resources and formalize best practices that we would like to follow on our team as we grow and our work becomes more complex.
+
+### Who should contribute?
+
+Everyone!
+
+-   If you learn a new skill that could be useful to others, make a minimal tutorial and add it to the wiki!
+
+-   If you create something new that will be part of the project for a while, add a documentation page to the wiki!
+
+-   If you come across a resource that could be valuable to others, add a link to the wiki!
+
+### **How to contribute**
+
+You can contribute a new page to the wiki in the form of an RMD file, QMD file, an MD file or an ipynb file. They can be easily added to the appropriate section using the \_quarto.yml file, which ultimately configures how the site is rendered.
+
+This is a Quarto website.
+
+To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+
+### Rules
+
+-   Never share PII or PHI on this site!
+
+-   Never share secret tokens or passwords.
+
+-   Do not share links to Box or other resources that do not require authentication.
+
+-   When in doubt, ask Jake.

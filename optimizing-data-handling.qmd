@@ -1,0 +1,280 @@
+---
+title: "Optimizing Data Handling with R and BigQuery"
+author: 
+  - Jake Peters
+  - Rebecca Sansale
+date-modified: Oct.6, 2023
+---
+
+As our dataset continues to grow, optimizing data handling becomes paramount for computational efficiency and memory usage. This tutorial explores four methods to achieve these goals, focusing on offloading computation to BigQuery through SQL queries. By following simple rules, such as being selective about data loading and leveraging Materialized Views, you can streamline your data workflows and make them more efficient.
+
+## Simple Rules for Optimization
+
+To ensure efficient data handling, let's agree on some simple rules:
+
+1.  **Be Selective**: Load only the variables you need.
+
+2.  **Leverage BigQuery**: Perform filters, joins, and manipulations in BigQuery using SQL or dbConnect/dbplyr.
+
+3.  **Use Views**: Consider creating Materialized Views in BigQuery for repetitive operations.
+
+## 4 Methods for Downloading/Manipulating BQ data
+
+### About the Example Data and Analysis
+
+In this tutorial, we work with the "bigquery-public-data.samples.natality" dataset, containing information related to births, including details about newborns like gender, birth weight, and data source.
+
+### Transformations Across All Methods
+
+Common transformations are performed in each method:
+
+1.  **Filtering for Male Newborns**: Include only records for male newborns (is_male == 1).
+
+2.  **Inner Join with Itself**: Perform an inner join with the same dataset based on the "source" column, duplicating the dataset.
+
+3.  **Weight Conversion**: Calculate birth weight in kilograms (birth_weight_kg) by converting pounds to kilograms (0.453592).
+
+## 4 Methods of Loading and Processing Data from BigQuery in R
+
+This tutorial explores four distinct methods for efficiently loading and processing data from BigQuery in the R programming language. Handling large datasets and performing data transformations is a fundamental aspect of data science and analytics. As data scientists and engineers, it's crucial to adopt practices that optimize computational efficiency, memory usage, and maintainability in our data workflows.
+
+In this tutorial, we delve into four distinct approaches, each with its own set of advantages and considerations.
+
+### Load dependencies & parameterize
+
+``` r
+library(bigrquery)
+library(DBI)
+library(dbplyr)
+library(dplyr)
+
+# Define project, dataset, and table IDs
+project_id <- "bigquery-public-data"
+dataset    <- "samples"
+table      <- "natality"
+```
+
+### **Method 1**: Using bq_table_download
+
+In Method 1, we load data using bq_table_download in BigQuery, then perform data filtering, transformations, and joins in the local R environment.
+
+``` r
+method1_function <- function(project_id, dataset, table) {
+  # Build the SQL query using glue
+  sql_query <- glue::glue("SELECT * FROM `{project_id}.{dataset}.{table}` WHERE is_male = 1")
+  
+  # Execute the query
+  query_result <- bigrquery::bq_query(sql_query)
+  
+  # Fetch and process the data
+  result <- bigrquery::bq_table_download(query_result) %>%
+    dplyr::filter(result, is_male == 1) %>%
+    dplyr::inner_join(result, result, by = "source") %>% 
+    dplyr::mutate(result, birth_weight_kg = weight_pounds * 0.453592)
+  return(result)
+}
+
+df1 <- method1_function(project_id, dataset, table)
+head(df1)
+```
+
+Pros
+
+-   Simplicity: This method is straightforward and easy to use, making it suitable for quick data retrieval.
+
+-   Intuitive Data Manipulation: Data manipulation in R after downloading is more intuitive, allowing for easy filtering, joining, and transformation using familiar R functions.
+
+Cons
+
+-   Data Volume Limitation: May not be suitable for very large datasets as it loads the entire table into memory, potentially causing memory issues.
+
+-   Additional Code for Transformation: Requires additional R code for filtering, joining, and transformation after downloading.
+
+### **Method 2**: Process with SQL in BigQuery
+
+Method 2 leverages the power of SQL within BigQuery to perform all data processing, including filtering, joining, and birth weight calculations, directly in the SQL query within BigQuery itself. This approach minimizes the need for additional R data manipulation.
+
+Let's create an SQL query in BigQuery that handles all the required data transformations:
+
+``` r
+# Build the SQL query using glue to perform all data processing in BigQuery
+sql_query <- glue::glue(
+  "SELECT
+    t1.*,
+    t2.*,
+    weight_pounds * 0.453592 AS birth_weight_kg
+  FROM
+    `{project_id}.{dataset}.{table}` AS t1
+  JOIN
+    `{project_id}.{dataset}.{table}` AS t2
+  ON
+    t1.source = t2.source
+  WHERE
+    t1.is_male = 1"
+)
+
+# Execute the query
+query_result <- bigrquery::bq_query(sql_query)
+
+# Fetch the processed data directly from BigQuery
+result <- bigrquery::bq_table_download(query_result)
+```
+
+Pros
+
+-   SQL Expertise: Ideal for users with SQL expertise, as data filtering, joining, and transformation can be done entirely in SQL, leveraging the power of BigQuery.
+
+-   Efficiency: SQL queries can be optimized for efficient data retrieval and processing within BigQuery.
+
+Cons
+
+-   SQL Knowledge Required: Requires proficiency in SQL for writing complex queries, which may not be suitable for all R users.
+
+-   Potential for Complex SQL: Complex SQL queries can become difficult to manage and debug.
+
+### **Method 3**: Using dbConnect and dbplyr
+
+In Method 3, we establish a database connection and leverage dbplyr to perform data filtering, joins, and transformations directly in BigQuery. This method combines SQL and R flexibility while utilizing lazy evaluation.
+
+``` r
+method3_function <- function(project_id, dataset, table) {
+  # Establish a database connection
+  con <- DBI::dbConnect(bigrquery::bigquery(), project = project_id, dataset = dataset)
+  
+  # Query and process the data using dbplyr
+  data <- dbplyr::tbl(con, table) %>%
+    dplyr::filter(is_male == 1) %>%
+    dplyr::inner_join(dbplyr::tbl(con, table), by = "source") %>%
+    dplyr::mutate(birth_weight_kg = weight_pounds * 0.453592)
+  
+  # Disconnect from the database
+  DBI::dbDisconnect(con)
+  return(data)
+}
+
+df3 <- method2_function(project_id, dataset, table)
+head(df3)
+```
+
+Pros
+
+-   Lazy Evaluation: Utilizes lazy evaluation, allowing you to build and optimize the query step by step, enhancing query efficiency.
+
+-   SQL and R Integration: Offers the benefits of both SQL and R, making it flexible for users with varying levels of SQL expertise.
+
+Cons
+
+-   Database Connection Overhead: Establishing and managing a database connection can add some overhead to the process.
+
+-   Learning Curve: Users not familiar with dbplyr may need time to learn and adapt to this method.
+
+### **Method 4**: Using "Materialized View" in BigQuery
+
+Method 4 involves creating a materialized view in BigQuery that includes all data filtering, transformations, and joins. We access preprocessed data directly from the view, reducing the need for complex transformations in R.
+
+**Create a Materialized View in BigQuery:**
+
+``` sql
+CREATE MATERIALIZED VIEW `your_project.your_dataset.your_materialized_view` AS
+SELECT
+  column1,
+  column2,
+  SUM(sales_amount) AS total_sales,
+  weight_pounds * 0.453592 AS birth_weight_kg
+FROM
+  `your_project.your_dataset.sales_data`
+WHERE
+  is_male = 1
+GROUP BY
+  column1, column2, birth_weight_kg;
+```
+
+**Accessing Data from the Materialized View**
+
+Now, let's load and process data using Method 4, where all data analysis is performed within the SQL query that generates the materialized view. We won't need additional R data manipulation in this method.
+
+``` r
+method4_function <- function(project_id, dataset, table) {
+  # Build the SQL query to directly access the materialized view
+  sql_query <- glue::glue("SELECT * FROM `{project_id}.{dataset}.{table}_materialized_view`")
+  
+  # Execute the query
+  query_result <- bigrquery::bq_query(sql_query)
+  
+  # Fetch the data directly from the materialized view
+  result <- bigrquery::bq_table_download(query_result)
+  
+  return(result)
+}
+
+df4 <- method4_function(project_id, dataset, table)
+head(df4)
+```
+
+**Pros**
+
+-   Preprocessed Data: Materialized views in BigQuery store preprocessed and aggregated data, reducing the need for complex transformations in R.
+
+-   Efficiency: Retrieving data from a materialized view is often faster than processing raw data.
+
+**Cons**
+
+-   Limited Flexibility: Materialized views are predefined, limiting flexibility for custom transformations or ad-hoc queries.
+
+-   Maintenance: Materialized views require maintenance to ensure they stay up-to-date with source data changes.
+
+## Verification
+
+To ensure the correctness of our methods, we'll verify that the data frames returned by each method are identical.
+
+``` r
+# Verify data frame equality
+identical_df1_df2 <- identical(df1, df2)
+identical_df1_df3 <- identical(df1, df3)
+identical_df1_df4 <- identical(df1, df4)
+identical_df2_df3 <- identical(df2, df3)
+identical_df2_df4 <- identical(df2, df4)
+identical_df3_df4 <- identical(df3, df4)
+
+# Display data frame equality verification
+cat("Data Frame Equality Verification:\n")
+cat("Method 1 and Method 2: ", identical_df1_df2, "\n")
+cat("Method 1 and Method 3: ", identical_df1_df3, "\n")
+cat("Method 1 and Method 4: ", identical_df1_df4, "\n")
+cat("Method 2 and Method 3: ", identical_df2_df3, "\n")
+cat("Method 2 and Method 4: ", identical_df2_df4, "\n")
+cat("Method 3 and Method 4: ", identical_df3_df4, "\n")
+```
+
+## Benchmarking
+
+To determine which method is most efficient, let's benchmark each approach.
+
+``` r
+library(microbenchmark)
+
+# Benchmark each method
+benchmark_results <- microbenchmark(
+  Method1 = method1_function(project_id, dataset, table),
+  Method2 = method2_function(project_id, dataset, table),
+  Method3 = method3_function(project_id, dataset, table),
+  Method4 = method4_function(project_id, dataset, table),
+  times = 100
+)
+
+# Compare and summarize the benchmark results
+summary(benchmark_results)
+```
+
+## Conclusions
+
+In conclusion, the choice of data handling method in BigQuery and R depends on your specific needs. If simplicity and familiarity are your priorities, Method 1 may be suitable. For those proficient in SQL, Method 2 provides efficiency. Method 3 combines SQL and R flexibility, while Method 4 excels in efficiency and preprocessed data. By understanding these methods, you can optimize your data workflows and make informed decisions, improving your data analysis projects.
+
+## References and Helpful Links
+
+-   Using dbConnect and dbplyr:
+    -   [Introduction to dbplyr](https://cran.r-project.org/web/packages/dbplyr/vignettes/dbplyr.html)
+    -   [dbplyr SQL translation](https://dbplyr.tidyverse.org/articles/sql-translation.html)
+    -   [SQL queries in RMD](https://lazyanalyst.medium.com/sql-in-r-markdown-2ceffeb7df4)
+-   Querying BigQuery using SQL directly in rmarkdown:
+    -   [RMD and SQL](https://lazyanalyst.medium.com/sql-in-r-markdown-2ceffeb7df4)

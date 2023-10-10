@@ -1,0 +1,90 @@
+project:
+  type: website
+
+
+website:
+  title: c4cp Analytics Team Wiki
+
+  navbar:
+    background: primary
+    search: true
+    tools:
+    - icon: youtube
+      menu:
+    - icon: box
+      menu:
+        - text: QC Reports
+          url: https://nih.app.box.com/folder/136319755809
+    - icon: cloud
+      menu:
+        - text: dev
+          url: https://console.cloud.google.com/bigquery?project=nih-nci-dceg-connect-dev
+        - text: stg
+          url: https://console.cloud.google.com/bigquery?project=nih-nci-dceg-connect-stg-5519
+        - text: prod
+          url: https://console.cloud.google.com/bigquery?project=nih-nci-dceg-connect-prod-6d04
+        - text: bq2-dev
+          url: 
+    - icon: github
+      menu: 
+        - text: Analyticsphere
+          url: https://github.com/analyticsphere
+        - text: Analyticsphere/qaqc_testing
+          url: https://github.com/Analyticsphere/qaqc_testing
+        - text: Analyticsphere/flatteningRequest
+          url: https://github.com/Analyticsphere/flatteningRequests
+        - text: Analyticsphere/ConnectMasterAndSurveyCombinedDataDictionary
+          url: https://github.com/Analyticsphere/ConnectMasterAndSurveyCombinedDataDictionary
+        - text: Analyticsphere/ccc_module_metrics_gcp_pipeline
+          url: https://github.com/Analyticsphere/ccc_module_metrics_gcp_pipeline
+        - text: Analyticsphere/ccc_biospecimen_metrics_gcp_pipeline
+          url: https://github.com/Analyticsphere/ccc_biospecimen_metrics_gcp_pipeline
+        - text: Analyticsphere/weekly_ccc_report_gcp_pipeline
+          url: https://github.com/Analyticsphere/weekly_ccc_report_gcp_pipeline
+        - text: Analyticsphere/CIDTool
+          url: https://github.com/Analyticsphere/CIDTool
+    
+  sidebar:
+    logo: logo.png
+    style: "docked"
+    search: true
+    pinned: true
+    
+    contents:
+      - href: index.qmd
+        text: Home
+      - team-roles.qmd
+            
+      - section: Documentation
+        contents: 
+             - bigquery-data-tables.qmd
+             - flattening.qmd
+             - qaqc.qmd
+             - reporting-pipelines.qmd
+             - gcp-box-connection.qmd
+             - survey-metrics.qmd
+             - biospecimen-metrics.qmd
+             - stakeholder-metrics-dashboard.qmd
+      
+      - section: Tutorials
+        contents: 
+          - href: using-bigquery.qmd
+          - href: using-github.qmd
+      - section: Best Practices
+        contents: 
+          - href: optimizing-data-handling.qmd
+          - href: style-guide.qmd
+      
+      - section: Training
+      
+      - section: SOPs
+      
+      - section: Covering for PTO
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+editor: visual
