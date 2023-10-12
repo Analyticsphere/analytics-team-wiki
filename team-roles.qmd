@@ -1,6 +1,5 @@
 ---
 title: Team Roles
-author: Analytics Team
 date-modified: Oct. 5, 2023
 ---
 
@@ -10,23 +9,29 @@ date-modified: Oct. 5, 2023
 
     -   The boss
 
--   Jing, Senior Analyst:
+-   Jing
 
     -   
 
--   Kelsey, Analyst:
+-   Kelsey
 
     -   
 
 -   Jake Peters, Data Scientist:
 
-    -   GCP Pipelines, Flattening/Data Modeling, Box automation
+    -   Automate/maintain reporting pipelines in GCP
 
--   Madhuri, Analytics Coordinator
+    -   Develop/maintain flattening workflow for BigQuery tables
+
+    -   Automate QAQC workflow
+
+    -   Develop/maintain connection from GCP to Box
+
+-   Madhuri
 
     -   
 
--   Rebecca, Analyst:
+-   Rebecca
 
     -   
 
