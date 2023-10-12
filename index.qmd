@@ -19,11 +19,11 @@ Everyone!
 
 ### **How to contribute**
 
-You can contribute a new page to the wiki in the form of an RMD file, QMD file, an MD file or an ipynb file. They can be easily added to the appropriate section using the \_quarto.yml file, which ultimately configures how the site is rendered. 
+You can contribute a new page to the wiki in the form of an RMD file, QMD file, an MD file or an ipynb file. They can be easily added to the appropriate section using the \_quarto.yml file, which ultimately configures how the site is rendered.
 
 The code for this website live in this repo: https://github.com/Analyticsphere/analytics-team-wiki
 
-Pushing commits to the main branch automatically updates the website via GitHub Pages. The site must be rendered locally using `quarto render` prior to pushing changes. 
+Pushing commits to the main branch automatically updates the website via GitHub Pages. The site must be rendered locally using `quarto render` prior to pushing changes.
 
 This is a Quarto website.
 
