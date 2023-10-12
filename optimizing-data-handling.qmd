@@ -6,9 +6,13 @@ author:
 date-modified: Oct.6, 2023
 ---
 
-**THIS TUTORIAL IS CURRENTLY UNDER DEVELOPMENT. THIS NOTE WILL BE REPMOVED WHEN FINALIZED**
+**THIS TUTORIAL IS CURRENTLY UNDER DEVELOPMENT. THIS NOTE WILL BE REMOVED WHEN FINALIZED**
 
-As our dataset continues to grow, optimizing data handling becomes paramount for computational efficiency and memory usage. This tutorial explores four methods to achieve these goals, focusing on offloading computation to BigQuery through SQL queries. By following simple rules, such as being selective about data loading and leveraging Materialized Views, you can streamline your data workflows and make them more efficient.
+**TODO: (1) Make code chunks executable (2) Use functioning query related to a more relevant example**
+
+## Introduction
+
+As our data set continues to grow, optimizing data handling becomes paramount for computational efficiency and memory usage. This tutorial explores four methods to achieve these goals, focusing on offloading computation to BigQuery through SQL queries. By following simple rules, such as being selective about data loading and leveraging Materialized Views, you can streamline your data workflows and make them more efficient.
 
 ## Simple Rules for Optimization
 
@@ -20,27 +24,11 @@ To ensure efficient data handling, let's agree on some simple rules:
 
 3.  **Use Views**: Consider creating Materialized Views in BigQuery for repetitive operations.
 
-## 4 Methods for Downloading/Manipulating BQ data
-
-### About the Example Data and Analysis
-
-In this tutorial, we work with the "bigquery-public-data.samples.natality" dataset, containing information related to births, including details about newborns like gender, birth weight, and data source.
-
-### Transformations Across All Methods
-
-Common transformations are performed in each method:
-
-1.  **Filtering for Male Newborns**: Include only records for male newborns (is_male == 1).
-
-2.  **Inner Join with Itself**: Perform an inner join with the same dataset based on the "source" column, duplicating the dataset.
-
-3.  **Weight Conversion**: Calculate birth weight in kilograms (birth_weight_kg) by converting pounds to kilograms (0.453592).
-
 ## 4 Methods of Loading and Processing Data from BigQuery in R
 
 This tutorial explores four distinct methods for efficiently loading and processing data from BigQuery in the R programming language. Handling large datasets and performing data transformations is a fundamental aspect of data science and analytics. As data scientists and engineers, it's crucial to adopt practices that optimize computational efficiency, memory usage, and maintainability in our data workflows.
 
-In this tutorial, we delve into four distinct approaches, each with its own set of advantages and considerations.
+In this tutorial, we delve into four distinct approaches, each with its own set of advantages and considerations. We'll perform the same filters, joins and calculations in each example, but accomplish them in different ways. Then we'll discuss the trade-offs of each method.
 
 ### Load dependencies & parameterize
 

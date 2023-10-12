@@ -355,12 +355,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#simple-rules-for-optimization" id="toc-simple-rules-for-optimization" class="nav-link active" data-scroll-target="#simple-rules-for-optimization">Simple Rules for Optimization</a></li>
-  <li><a href="#methods-for-downloadingmanipulating-bq-data" id="toc-methods-for-downloadingmanipulating-bq-data" class="nav-link" data-scroll-target="#methods-for-downloadingmanipulating-bq-data">4 Methods for Downloading/Manipulating BQ data</a>
-  <ul class="collapse">
-  <li><a href="#about-the-example-data-and-analysis" id="toc-about-the-example-data-and-analysis" class="nav-link" data-scroll-target="#about-the-example-data-and-analysis">About the Example Data and Analysis</a></li>
-  <li><a href="#transformations-across-all-methods" id="toc-transformations-across-all-methods" class="nav-link" data-scroll-target="#transformations-across-all-methods">Transformations Across All Methods</a></li>
-  </ul></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#simple-rules-for-optimization" id="toc-simple-rules-for-optimization" class="nav-link" data-scroll-target="#simple-rules-for-optimization">Simple Rules for Optimization</a></li>
   <li><a href="#methods-of-loading-and-processing-data-from-bigquery-in-r" id="toc-methods-of-loading-and-processing-data-from-bigquery-in-r" class="nav-link" data-scroll-target="#methods-of-loading-and-processing-data-from-bigquery-in-r">4 Methods of Loading and Processing Data from BigQuery in R</a>
   <ul class="collapse">
   <li><a href="#load-dependencies-parameterize" id="toc-load-dependencies-parameterize" class="nav-link" data-scroll-target="#load-dependencies-parameterize">Load dependencies &amp; parameterize</a></li>
@@ -409,8 +405,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p><strong>THIS TUTORIAL IS CURRENTLY UNDER DEVELOPMENT. THIS NOTE WILL BE REPMOVED WHEN FINALIZED</strong></p>
-<p>As our dataset continues to grow, optimizing data handling becomes paramount for computational efficiency and memory usage. This tutorial explores four methods to achieve these goals, focusing on offloading computation to BigQuery through SQL queries. By following simple rules, such as being selective about data loading and leveraging Materialized Views, you can streamline your data workflows and make them more efficient.</p>
+<p><strong>THIS TUTORIAL IS CURRENTLY UNDER DEVELOPMENT. THIS NOTE WILL BE REMOVED WHEN FINALIZED</strong></p>
+<p><strong>TODO: (1) Make code chunks executable (2) Use functioning query related to a more relevant example</strong></p>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>As our data set continues to grow, optimizing data handling becomes paramount for computational efficiency and memory usage. This tutorial explores four methods to achieve these goals, focusing on offloading computation to BigQuery through SQL queries. By following simple rules, such as being selective about data loading and leveraging Materialized Views, you can streamline your data workflows and make them more efficient.</p>
+</section>
 <section id="simple-rules-for-optimization" class="level2">
 <h2 class="anchored" data-anchor-id="simple-rules-for-optimization">Simple Rules for Optimization</h2>
 <p>To ensure efficient data handling, let’s agree on some simple rules:</p>
@@ -420,26 +420,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>Use Views</strong>: Consider creating Materialized Views in BigQuery for repetitive operations.</p></li>
 </ol>
 </section>
-<section id="methods-for-downloadingmanipulating-bq-data" class="level2">
-<h2 class="anchored" data-anchor-id="methods-for-downloadingmanipulating-bq-data">4 Methods for Downloading/Manipulating BQ data</h2>
-<section id="about-the-example-data-and-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="about-the-example-data-and-analysis">About the Example Data and Analysis</h3>
-<p>In this tutorial, we work with the “bigquery-public-data.samples.natality” dataset, containing information related to births, including details about newborns like gender, birth weight, and data source.</p>
-</section>
-<section id="transformations-across-all-methods" class="level3">
-<h3 class="anchored" data-anchor-id="transformations-across-all-methods">Transformations Across All Methods</h3>
-<p>Common transformations are performed in each method:</p>
-<ol type="1">
-<li><p><strong>Filtering for Male Newborns</strong>: Include only records for male newborns (is_male == 1).</p></li>
-<li><p><strong>Inner Join with Itself</strong>: Perform an inner join with the same dataset based on the “source” column, duplicating the dataset.</p></li>
-<li><p><strong>Weight Conversion</strong>: Calculate birth weight in kilograms (birth_weight_kg) by converting pounds to kilograms (0.453592).</p></li>
-</ol>
-</section>
-</section>
 <section id="methods-of-loading-and-processing-data-from-bigquery-in-r" class="level2">
 <h2 class="anchored" data-anchor-id="methods-of-loading-and-processing-data-from-bigquery-in-r">4 Methods of Loading and Processing Data from BigQuery in R</h2>
 <p>This tutorial explores four distinct methods for efficiently loading and processing data from BigQuery in the R programming language. Handling large datasets and performing data transformations is a fundamental aspect of data science and analytics. As data scientists and engineers, it’s crucial to adopt practices that optimize computational efficiency, memory usage, and maintainability in our data workflows.</p>
-<p>In this tutorial, we delve into four distinct approaches, each with its own set of advantages and considerations.</p>
+<p>In this tutorial, we delve into four distinct approaches, each with its own set of advantages and considerations. We’ll perform the same filters, joins and calculations in each example, but accomplish them in different ways. Then we’ll discuss the trade-offs of each method.</p>
 <section id="load-dependencies-parameterize" class="level3">
 <h3 class="anchored" data-anchor-id="load-dependencies-parameterize">Load dependencies &amp; parameterize</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bigrquery)</span>
