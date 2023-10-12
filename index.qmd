@@ -1,5 +1,6 @@
 ---
 title: "Welcome to the Analytics Team Wiki"
+date-modified: Oct. 12, 2023
 ---
 
 ### Why a wiki?
