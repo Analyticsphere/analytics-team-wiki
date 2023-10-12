@@ -6,6 +6,8 @@ author:
 date-modified: Oct.6, 2023
 ---
 
+**THIS TUTORIAL IS CURRENTLY UNDER DEVELOPMENT. THIS NOTE WILL BE REPMOVED WHEN FINALIZED**
+
 As our dataset continues to grow, optimizing data handling becomes paramount for computational efficiency and memory usage. This tutorial explores four methods to achieve these goals, focusing on offloading computation to BigQuery through SQL queries. By following simple rules, such as being selective about data loading and leveraging Materialized Views, you can streamline your data workflows and make them more efficient.
 
 ## Simple Rules for Optimization
@@ -42,7 +44,7 @@ In this tutorial, we delve into four distinct approaches, each with its own set 
 
 ### Load dependencies & parameterize
 
-```r
+``` r
 library(bigrquery)
 library(DBI)
 library(dbplyr)

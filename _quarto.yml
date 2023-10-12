@@ -65,6 +65,7 @@ website:
              - gcp-box-connection.qmd
              - survey-metrics.qmd
              - biospecimen-metrics.qmd
+             - operations-metrics.qmd
              - stakeholder-metrics-dashboard.qmd
       
       - section: Tutorials
