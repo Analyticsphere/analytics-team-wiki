@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Analytics Team">
+<meta name="author" content="Jake Peters">
 
-<title>c4cp Analytics Team Wiki - Team Roles</title>
+<title>c4cp Analytics Team Wiki - GitHub Contributions Tutorial</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -167,7 +167,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./team-roles.html">Team Roles</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./contributing-to-github.html">Tutorials</a></li><li class="breadcrumb-item"><a href="./contributing-to-github.html">GitHub Contributions Tutorial</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -200,7 +200,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./team-roles.html" class="sidebar-item-text sidebar-link active">
+  <a href="./team-roles.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Team Roles</span></a>
   </div>
 </li>
@@ -274,7 +274,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./contributing-to-github.html" class="sidebar-item-text sidebar-link">
+  <a href="./contributing-to-github.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">GitHub Contributions Tutorial</span></a>
   </div>
 </li>
@@ -317,7 +317,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Team Roles</h1>
+<h1 class="title">GitHub Contributions Tutorial</h1>
 </div>
 
 
@@ -327,7 +327,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Analytics Team </p>
+             <p>Jake Peters </p>
           </div>
   </div>
     
@@ -335,7 +335,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 5, 2023</p>
+      <p class="date-modified">November 11, 2023</p>
     </div>
   </div>
     
@@ -344,37 +344,75 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="current-members" class="level4">
-<h4 class="anchored" data-anchor-id="current-members">Current Members</h4>
+<section id="summary" class="level4">
+<h4 class="anchored" data-anchor-id="summary">Summary:</h4>
+<p>This guide will help you clone a feature branch from a GitHub repo, keep it up-to-date with the main branch, make well-documented commits, and create a pull request. We’ll emphasize explicit <code>git add</code> commands, ignoring unnecessary files, and linking to GitHub issues for trace-ability.</p>
+</section>
+<section id="clone-the-feature-branch" class="level4">
+<h4 class="anchored" data-anchor-id="clone-the-feature-branch">1. Clone the Feature Branch:</h4>
 <ul>
-<li><p>Nicole, Lead Analyst:</p>
-<ul>
-<li>The boss</li>
-</ul></li>
-<li><p>Jing, Senior Analyst:</p>
-<ul>
-<li></li>
-</ul></li>
-<li><p>Kelsey, Analyst:</p>
-<ul>
-<li></li>
-</ul></li>
-<li><p>Jake Peters, Data Scientist:</p>
-<ul>
-<li>GCP Pipelines, Flattening/Data Modeling, Box automation</li>
-</ul></li>
-<li><p>Madhuri, Analytics Coordinator</p>
-<ul>
-<li></li>
-</ul></li>
-<li><p>Rebecca, Analyst:</p>
-<ul>
-<li></li>
-</ul></li>
+<li><p>Open your terminal.</p></li>
+<li><p>Navigate to the directory where you want to clone the project.</p></li>
+<li><p>Run the following command to clone the feature branch:</p>
+<p><code>git clone -b feature-branch https://github.com/Analyticsphere/featureBranch.git</code></p></li>
+<li><p>Replace <code>feature-branch</code> with your feature branch name. Replace <code>https://github.com/Analyticsphere/featureBranch.git</code> with the URL for the specific branch that you are cloning.</p></li>
 </ul>
 </section>
-<section id="past-members" class="level4">
-<h4 class="anchored" data-anchor-id="past-members">Past Members</h4>
+<section id="keep-your-local-repository-up-to-date" class="level4">
+<h4 class="anchored" data-anchor-id="keep-your-local-repository-up-to-date">2. Keep Your Local Repository Up-to-Date:</h4>
+<ul>
+<li><p>Ensure you’re on your feature branch:</p>
+<p><code>git checkout feature-branch</code></p></li>
+<li><p>Fetch the latest changes from the main branch:</p>
+<p><code>git fetch origin main</code></p></li>
+<li><p>Merge the main branch into your feature branch:</p>
+<p><code>git merge origin/main</code></p></li>
+</ul>
+</section>
+<section id="make-explicit-commits" class="level4">
+<h4 class="anchored" data-anchor-id="make-explicit-commits">3. Make Explicit Commits:</h4>
+<ul>
+<li><p>Make changes to your code.</p></li>
+<li><p>Stage your changes explicitly, one by one:</p>
+<p><code>git add file1.R</code></p>
+<p><code>git add file2.py</code></p></li>
+<li><p>Enter <code>git status</code> to view all staged/upstaged files. Add only the files that you’d like to track.</p></li>
+<li><p>Commit your changes with a meaningful message and Link to GitHub issues for trace-ability.:</p>
+<p><code>git commit -m "Fix issue #X: Description of the change."</code></p></li>
+<li><p>Ensure you follow best practices in commit messages.</p></li>
+</ul>
+</section>
+<section id="ignoring-unnecessary-files" class="level4">
+<h4 class="anchored" data-anchor-id="ignoring-unnecessary-files">4. Ignoring Unnecessary Files:</h4>
+<ul>
+<li><p>Open the <code>.gitignore</code> file in your project.</p></li>
+<li><p>Add the following lines to ignore <code>.Rhistory</code>, <code>.Rdata</code>, and <code>.Rproj</code> files: <code>.Rhistory .Rdata .Rproj.user/</code></p></li>
+<li><p>Save and commit the <code>.gitignore</code> changes.</p></li>
+</ul>
+</section>
+<section id="push-changes-to-github" class="level4">
+<h4 class="anchored" data-anchor-id="push-changes-to-github">5. Push Changes to GitHub:</h4>
+<ul>
+<li><p>Push your changes to your feature branch:</p>
+<p><code>git push origin feature-branch</code></p></li>
+</ul>
+</section>
+<section id="create-a-pull-request" class="level4">
+<h4 class="anchored" data-anchor-id="create-a-pull-request">6. Create a Pull Request:</h4>
+<ul>
+<li><p>Visit your GitHub repository.</p></li>
+<li><p>Click “New Pull Request.”</p></li>
+<li><p>Set the base branch to <code>main</code> and the compare branch to your <code>feature-branch</code>.</p></li>
+<li><p>Provide a clear title and description for the pull request.</p></li>
+<li><p>Submit the pull request for code review.</p></li>
+</ul>
+</section>
+<section id="delete-the-feature-branch" class="level4">
+<h4 class="anchored" data-anchor-id="delete-the-feature-branch">7. Delete the feature branch:</h4>
+<ul>
+<li><p>If your branch is related to a specific feature that now merged with the main branch, it is a good practice to delete it, both locally and in the GitHub repo.</p></li>
+<li><p>When you work on a new feature, create a new branch and begin again!</p></li>
+</ul>
 
 
 </section>

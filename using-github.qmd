@@ -1,9 +1,0 @@
----
-title: "Using GitHub"
-author: "Jake Peters"
-date-modified: Oct. 5, 2023
----
-
-#### **Analytics Team Repositories**
-
-#### **GitHub Best Practices**

@@ -1,0 +1,85 @@
+---
+title: "GitHub Contributions Tutorial"
+author: "Jake Peters"
+date-modified: "2023-11-11"
+---
+
+#### Summary:
+
+This guide will help you clone a feature branch from a GitHub repo, keep it up-to-date with the main branch, make well-documented commits, and create a pull request. We'll emphasize explicit `git add` commands, ignoring unnecessary files, and linking to GitHub issues for trace-ability.
+
+#### 1. Clone the Feature Branch:
+
+-   Open your terminal.
+
+-   Navigate to the directory where you want to clone the project.
+
+-   Run the following command to clone the feature branch:
+
+    `git clone -b feature-branch https://github.com/Analyticsphere/featureBranch.git`
+
+-   Replace `feature-branch` with your feature branch name. Replace `https://github.com/Analyticsphere/featureBranch.git` with the URL for the specific branch that you are cloning.
+
+#### 2. Keep Your Local Repository Up-to-Date:
+
+-   Ensure you're on your feature branch:
+
+    `git checkout feature-branch`
+
+-   Fetch the latest changes from the main branch:
+
+    `git fetch origin main`
+
+-   Merge the main branch into your feature branch:
+
+    `git merge origin/main`
+
+#### 3. Make Explicit Commits:
+
+-   Make changes to your code.
+
+-   Stage your changes explicitly, one by one:
+
+    `git add file1.R`
+
+    `git add file2.py`
+
+-   Enter `git status` to view all staged/upstaged files. Add only the files that you'd like to track.
+
+-   Commit your changes with a meaningful message and Link to GitHub issues for trace-ability.:
+
+    `git commit -m "Fix issue #X: Description of the change."`
+
+-   Ensure you follow best practices in commit messages.
+
+#### 4. Ignoring Unnecessary Files:
+
+-   Open the `.gitignore` file in your project.
+
+-   Add the following lines to ignore `.Rhistory`, `.Rdata`, and `.Rproj` files: `.Rhistory .Rdata .Rproj.user/`
+
+-   Save and commit the `.gitignore` changes.
+
+#### 5. Push Changes to GitHub:
+
+-   Push your changes to your feature branch:
+
+    `git push origin feature-branch`
+
+#### 6. Create a Pull Request:
+
+-   Visit your GitHub repository.
+
+-   Click "New Pull Request."
+
+-   Set the base branch to `main` and the compare branch to your `feature-branch`.
+
+-   Provide a clear title and description for the pull request.
+
+-   Submit the pull request for code review.
+
+#### 7. Delete the feature branch:
+
+-   If your branch is related to a specific feature that now merged with the main branch, it is a good practice to delete it, both locally and in the GitHub repo.
+
+-   When you work on a new feature, create a new branch and begin again!

@@ -42,7 +42,7 @@ In this tutorial, we delve into four distinct approaches, each with its own set 
 
 ### Load dependencies & parameterize
 
-``` r
+```r
 library(bigrquery)
 library(DBI)
 library(dbplyr)

@@ -3,5 +3,3 @@ title: Survey Metrics
 author: Kelsey Dowling
 date-modified: Oct. 5, 2023
 ---
-
-here is where kelsey could describe what reports she runs, where they are delivered, who reviews them, etcetera :)
