@@ -1,0 +1,23 @@
+---
+title: "BQ2 Work Flow"
+author: Jake Peters
+date-modified: Oct., 2023
+---
+
+This diagram depicts the high-level work flow for generating the BQ2 data.
+
+![](images/BQ2 Setup.png)
+
+Key Points:
+
+-   All arrows indicate scheduled data transfers or SQL queries.
+
+-   BQ2 will contain only de-identified data
+
+-   The main BQ2 dataset will have the original Concept IDs from the Data Dictionary (except for derived variables like binned age)
+
+-   All flattening, merging, cleaning and de-identification will occur in BQ1
+
+-   Derived materialized views will be used for the Stakeholder Metrics Dashboard (and other similar reports). They will reference the Main BQ2 data set, not the BQ1 data set. This will respect the PII barrier.
+
+We can discuss this further as a group! Just wanted to jot this down so that we have a common reference.
