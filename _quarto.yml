@@ -58,6 +58,7 @@ website:
             
       - section: Documentation
         contents: 
+             - bq2.qmd
              - bigquery-data-tables.qmd
              - flattening.qmd
              - qaqc.qmd
