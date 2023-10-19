@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "qaqc.html",
+    "href": "qaqc.html",
+    "title": "QAQC",
+    "section": "",
+    "text": "Here’s some documentation"
+  },
+  {
     "objectID": "optimizing-data-handling.html",
     "href": "optimizing-data-handling.html",
     "title": "Optimizing Data Handling with R and BigQuery",
@@ -7,18 +14,18 @@
     "text": "THIS TUTORIAL IS CURRENTLY UNDER DEVELOPMENT. THIS NOTE WILL BE REMOVED WHEN FINALIZED\nTODO: (1) Make code chunks executable (2) Use functioning query related to a more relevant example"
   },
   {
+    "objectID": "optimizing-data-handling.html#introduction",
+    "href": "optimizing-data-handling.html#introduction",
+    "title": "Optimizing Data Handling with R and BigQuery",
+    "section": "Introduction",
+    "text": "Introduction\nAs our data set continues to grow, optimizing data handling becomes paramount for computational efficiency and memory usage. This tutorial explores four methods to achieve these goals, focusing on offloading computation to BigQuery through SQL queries. By following simple rules, such as being selective about data loading and leveraging Materialized Views, you can streamline your data workflows and make them more efficient."
+  },
+  {
     "objectID": "optimizing-data-handling.html#simple-rules-for-optimization",
     "href": "optimizing-data-handling.html#simple-rules-for-optimization",
     "title": "Optimizing Data Handling with R and BigQuery",
     "section": "Simple Rules for Optimization",
     "text": "Simple Rules for Optimization\nTo ensure efficient data handling, let’s agree on some simple rules:\n\nBe Selective: Load only the variables you need.\nLeverage BigQuery: Perform filters, joins, and manipulations in BigQuery using SQL or dbConnect/dbplyr.\nUse Views: Consider creating Materialized Views in BigQuery for repetitive operations."
-  },
-  {
-    "objectID": "optimizing-data-handling.html#methods-for-downloadingmanipulating-bq-data",
-    "href": "optimizing-data-handling.html#methods-for-downloadingmanipulating-bq-data",
-    "title": "Optimizing Data Handling with R and BigQuery",
-    "section": "4 Methods for Downloading/Manipulating BQ data",
-    "text": "4 Methods for Downloading/Manipulating BQ data\n\nAbout the Example Data and Analysis\nIn this tutorial, we work with the “bigquery-public-data.samples.natality” dataset, containing information related to births, including details about newborns like gender, birth weight, and data source.\n\n\nTransformations Across All Methods\nCommon transformations are performed in each method:\n\nFiltering for Male Newborns: Include only records for male newborns (is_male == 1).\nInner Join with Itself: Perform an inner join with the same dataset based on the “source” column, duplicating the dataset.\nWeight Conversion: Calculate birth weight in kilograms (birth_weight_kg) by converting pounds to kilograms (0.453592)."
   },
   {
     "objectID": "optimizing-data-handling.html#methods-of-loading-and-processing-data-from-bigquery-in-r",
@@ -70,24 +77,17 @@
     "text": "Current Members\n\nNicole, Lead Analyst:\n\nThe boss\n\nJing\n\n\n\nKelsey\n\n\n\nJake Peters, Data Scientist:\n\nAutomate/maintain reporting pipelines in GCP\nDevelop/maintain flattening workflow for BigQuery tables\nAutomate QAQC workflow\nDevelop/maintain connection from GCP to Box\n\nMadhuri\n\n\n\nRebecca\n\n\n\n\n\n\nPast Members"
   },
   {
+    "objectID": "bq2.html",
+    "href": "bq2.html",
+    "title": "BQ2 Work Flow",
+    "section": "",
+    "text": "This diagram depicts the high-level work flow for generating the BQ2 data.\n\n[Lucid Chart Link]\nKey Points:\n\nAll arrows indicate scheduled data transfers or SQL queries.\nBQ2 will contain only de-identified data\nThe main BQ2 dataset will have the original Concept IDs from the Data Dictionary (except for derived variables like binned age)\nAll flattening, merging, cleaning and de-identification will occur in BQ1\nDerived materialized views will be used for the Stakeholder Metrics Dashboard (and other similar reports). They will reference the Main BQ2 data set, not the BQ1 data set. This will respect the PII barrier.\n\nWe can discuss this further as a group! Just wanted to jot this down so that we have a common reference."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Welcome to the Analytics Team Wiki",
     "section": "",
     "text": "Why a wiki?\nThis wiki is intended to gather the wealth of institutional knowledge that we have developed on this team into a persistent resource. This is especially useful for on-boarding new members, training colleagues to cover us while on PTO and for developing some overlapping knowledge across roles. We can also use this wiki to develop shared resources and formalize best practices that we would like to follow on our team as we grow and our work becomes more complex.\n\n\nWho should contribute?\nEveryone!\n\nIf you learn a new skill that could be useful to others, make a minimal tutorial and add it to the wiki!\nIf you create something new that will be part of the project for a while, add a documentation page to the wiki!\nIf you come across a resource that could be valuable to others, add a link to the wiki!\n\n\n\nHow to contribute\nYou can contribute a new page to the wiki in the form of an RMD file, QMD file, an MD file or an ipynb file. They can be easily added to the appropriate section using the _quarto.yml file, which ultimately configures how the site is rendered.\nThe code for this website live in this repo: https://github.com/Analyticsphere/analytics-team-wiki\nPushing commits to the main branch automatically updates the website via GitHub Pages. The site must be rendered locally using quarto render prior to pushing changes.\nThis is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n\nRules\n\nNever share PII or PHI on this site!\nNever share secret tokens or passwords.\nDo not share links to Box or other resources that do not require authentication.\nWhen in doubt, ask Jake."
-  },
-  {
-    "objectID": "optimizing-data-handling.html#introduction",
-    "href": "optimizing-data-handling.html#introduction",
-    "title": "Optimizing Data Handling with R and BigQuery",
-    "section": "Introduction",
-    "text": "Introduction\nAs our data set continues to grow, optimizing data handling becomes paramount for computational efficiency and memory usage. This tutorial explores four methods to achieve these goals, focusing on offloading computation to BigQuery through SQL queries. By following simple rules, such as being selective about data loading and leveraging Materialized Views, you can streamline your data workflows and make them more efficient."
-  },
-  {
-    "objectID": "bq2.html",
-    "href": "bq2.html",
-    "title": "BQ2 Work Flow",
-    "section": "",
-    "text": "This diagram depicts the high-level work flow for generating the BQ2 data.\n\nKey Points:\n\nAll arrows indicate scheduled data transfers or SQL queries.\nBQ2 will contain only de-identified data\nThe main BQ2 dataset will have the original Concept IDs from the Data Dictionary (except for derived variables like binned age)\nAll flattening, merging, cleaning and de-identification will occur in BQ1\nDerived materialized views will be used for the Stakeholder Metrics Dashboard (and other similar reports). They will reference the Main BQ2 data set, not the BQ1 data set. This will respect the PII barrier.\n\nWe can discuss this further as a group! Just wanted to jot this down so that we have a common reference."
   }
 ]
