@@ -1,5 +1,0 @@
----
-title: Survey Metrics
-author: Kelsey Dowling
-date-modified: Oct. 5, 2023
----
