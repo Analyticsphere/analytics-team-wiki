@@ -23,7 +23,9 @@ You can contribute a new page to the wiki in the form of an RMD file, QMD file, 
 
 The code for this website live in this repo: <https://github.com/Analyticsphere/analytics-team-wiki>
 
-Pushing commits to the main branch automatically updates the website via GitHub Pages. The site must be rendered locally using `quarto render` prior to pushing changes.
+Pushing commits to the main branch automatically updates the website via GitHub Pages using a GitHub actions workflow from this example:
+
+https://github.com/quarto-dev/quarto-actions/blob/main/examples/example-01-basics.md
 
 This is a Quarto website.
 
