@@ -11,7 +11,7 @@ This diagram depicts the high-level work flow for generating the BQ2 data.
 \[[Lucid Chart Link](https://lucid.app/lucidchart/7d4864f5-3e19-4210-8da8-99a6c98ff6b7/edit?viewport_loc=-1156%2C432%2C3328%2C1428%2C0_0&invitationId=inv_45fd4ac7-8213-43b5-951d-240389f6b138)\]\
 Key Points:
 
--   All arrows indicate scheduled data transfers or SQL queries.
+-   All arrows indicate scheduled data transfers or SQL queries
 
 -   BQ2 will contain only de-identified data
 
