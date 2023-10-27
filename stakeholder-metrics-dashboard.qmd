@@ -3,3 +3,42 @@ title: Stakeholder Metrics Dashboard
 author: Rebecca
 date-modified: Oct. 5, 2023
 ---
+Code Location
+
+All of the code that generates the stakeholder metrics dashboard is located in: Analyticsphere/stakeholderMetrics
+
+Operation Flow
+
+Authentication
+
+Currently (10/27), RS and JP are working with George Zaki to implement the auth0 library. Using auth0 will allow us to authenticate users through GCP using their NIH credentials, all through the posit interface that the stakeholders dashboard is hosted on here. 
+
+A few steps that we have had to take in order to make the auth0 library play nicely with the rshiny application:
+
+Registered the application with GCP, this required Daniels approval and credentials on GCP to complete this step. By registering the app with GCP, we now have a client ID and client secret that will be passed to auth0.
+
+Created a json file that looks identical to the yml file that GZ supplied us. 
+
+name: myApp
+
+remote_url: 'https://appshare-dev.cancer.gov/content/499a6759-6174-495b-8950-7af21faa8a5f'
+
+auth0_config:
+
+    api_url: https://bigquery.googleapis.com 
+
+    access: token 
+
+    request: token
+
+    scope: https://www.googleapis.com/auth/bigquery.readonly 
+
+    credentials:
+
+         key: !expr Sys.getenv("AUTH0_CLIENTID")
+
+         secret: !expr Sys.getenv("AUTH0_SECRET")
+
+Assigned the GCP clientID and client secret from the GCP json file to .renvironment variables
+
+more updates to come as this process continues**
