@@ -64,6 +64,7 @@ website:
              - qaqc.qmd
              - reporting-pipelines.qmd
              - gcp-box-connection.qmd
+             - delivery-of-site-data-to-box.qmd
              - survey-metrics.qmd
              - biospecimen-metrics.qmd
              - operations-metrics.qmd

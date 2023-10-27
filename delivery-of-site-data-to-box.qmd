@@ -1,0 +1,7 @@
+---
+title: "Delivery of Site Data to Box"
+author: Jake Peters
+date-modified: Oct. 27, 2023
+---
+
+![](images/deidentified-site-data-box-delivery-diagram.png)
