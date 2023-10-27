@@ -322,7 +322,15 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#code-location" id="toc-code-location" class="nav-link active" data-scroll-target="#code-location"><strong>Code Location</strong></a></li>
+  <li><a href="#operation-flow" id="toc-operation-flow" class="nav-link" data-scroll-target="#operation-flow">Operation Flow</a></li>
+  <li><a href="#authentication" id="toc-authentication" class="nav-link" data-scroll-target="#authentication">Authentication</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -356,34 +364,36 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Code Location</p>
-<p>All of the code that generates the stakeholder metrics dashboard is located in: Analyticsphere/stakeholderMetrics</p>
-<p>Operation Flow</p>
-<p>Authentication</p>
-<p>Currently (10/27), RS and JP are working with George Zaki to implement the auth0 library. Using auth0 will allow us to authenticate users through GCP using their NIH credentials, all through the posit interface that the stakeholders dashboard is hosted on here.</p>
+<section id="code-location" class="level2">
+<h2 class="anchored" data-anchor-id="code-location"><strong>Code Location</strong></h2>
+<p>All of the code that generates the stakeholder metrics dashboard is located in: <strong>Analyticsphere/stakeholderMetrics</strong></p>
+</section>
+<section id="operation-flow" class="level2">
+<h2 class="anchored" data-anchor-id="operation-flow">Operation Flow</h2>
+</section>
+<section id="authentication" class="level2">
+<h2 class="anchored" data-anchor-id="authentication">Authentication</h2>
+<p>Currently (10/27), RS and JP are working with George Zaki to implement the <a href="https://auth0.com/?utm_content=usbranded-auth0-auth0homepage&amp;utm_source=google&amp;utm_campaign=amer_mult_usa_all_ciam-all_dg-ao_auth0_search_google_text_kw_utm2&amp;utm_medium=cpc&amp;utm_term=auth0-c&amp;utm_id=aNK4z0000004GX8GAM&amp;gad=1&amp;gclid=CjwKCAjwv-2pBhB-EiwAtsQZFAow5aAmHtYe2mjdPfwXetctl7FVyPYxJUYWatuanCYeuT4cnkZZnRoCddQQAvD_BwE">auth0</a> library. Using auth0 will allow us to authenticate users through GCP using their NIH credentials, all through the posit interface that the stakeholders dashboard is hosted on <a href="https://appshare-dev.cancer.gov/connect/#/content/listing?filter=min_role:viewer&amp;filter=content_type:all&amp;view_type=compact">here</a>.</p>
 <p>A few steps that we have had to take in order to make the auth0 library play nicely with the rshiny application:</p>
-<p>Registered the application with GCP, this required Daniels approval and credentials on GCP to complete this step. By registering the app with GCP, we now have a client ID and client secret that will be passed to auth0.</p>
-<p>Created a json file that looks identical to the yml file that GZ supplied us.</p>
-<p>name: myApp</p>
-<p>remote_url: ‘https://appshare-dev.cancer.gov/content/499a6759-6174-495b-8950-7af21faa8a5f’</p>
-<p>auth0_config:</p>
-<pre><code>api_url: https://bigquery.googleapis.com 
-
-access: token 
-
-request: token
-
-scope: https://www.googleapis.com/auth/bigquery.readonly 
-
-credentials:
-
-     key: !expr Sys.getenv("AUTH0_CLIENTID")
-
-     secret: !expr Sys.getenv("AUTH0_SECRET")</code></pre>
-<p>Assigned the GCP clientID and client secret from the GCP json file to .renvironment variables</p>
-<p>more updates to come as this process continues**</p>
+<ol type="1">
+<li><p>Registered the application with GCP, this required Daniels approval and credentials on GCP to complete this step. By registering the app with GCP, we now have a client ID and client secret that will be passed to auth0.</p></li>
+<li><p>Created a json file that looks identical to the yml file that GZ supplied us.</p>
+<p><code>name: myApp</code></p>
+<p><code>remote_url: 'https://appshare-dev.cancer.gov/content/499a6759-6174-495b-8950-7af21faa8a5f'</code></p>
+<p><code>auth0_config:</code></p>
+<p><code>api_url: https://bigquery.googleapis.com</code></p>
+<p><code>access: token</code></p>
+<p><code>request: token</code></p>
+<p><code>scope: https://www.googleapis.com/auth/bigquery.readonly</code></p>
+<p><code>credentials:</code></p>
+<p><code>key: !expr Sys.getenv("AUTH0_CLIENTID")</code></p>
+<p><code>secret: !expr Sys.getenv("AUTH0_SECRET")</code></p></li>
+<li><p>Assigned the GCP clientID and client secret from the GCP json file to .renvironment variables</p></li>
+</ol>
+<p><em>more updates to come as this process continues</em>**</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
