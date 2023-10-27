@@ -356,6 +356,32 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<p>Code Location</p>
+<p>All of the code that generates the stakeholder metrics dashboard is located in: Analyticsphere/stakeholderMetrics</p>
+<p>Operation Flow</p>
+<p>Authentication</p>
+<p>Currently (10/27), RS and JP are working with George Zaki to implement the auth0 library. Using auth0 will allow us to authenticate users through GCP using their NIH credentials, all through the posit interface that the stakeholders dashboard is hosted on here.</p>
+<p>A few steps that we have had to take in order to make the auth0 library play nicely with the rshiny application:</p>
+<p>Registered the application with GCP, this required Daniels approval and credentials on GCP to complete this step. By registering the app with GCP, we now have a client ID and client secret that will be passed to auth0.</p>
+<p>Created a json file that looks identical to the yml file that GZ supplied us.</p>
+<p>name: myApp</p>
+<p>remote_url: ‘https://appshare-dev.cancer.gov/content/499a6759-6174-495b-8950-7af21faa8a5f’</p>
+<p>auth0_config:</p>
+<pre><code>api_url: https://bigquery.googleapis.com 
+
+access: token 
+
+request: token
+
+scope: https://www.googleapis.com/auth/bigquery.readonly 
+
+credentials:
+
+     key: !expr Sys.getenv("AUTH0_CLIENTID")
+
+     secret: !expr Sys.getenv("AUTH0_SECRET")</code></pre>
+<p>Assigned the GCP clientID and client secret from the GCP json file to .renvironment variables</p>
+<p>more updates to come as this process continues**</p>
 
 
 
