@@ -3,3 +3,9 @@ title: "GCP to Box Connection"
 author: "Jake Peters"
 date-modified: Oct. 5, 2023
 ---
+
+<div>
+
+</div>
+
+![](images/export-from-gcp-to-box.drawio.svg)

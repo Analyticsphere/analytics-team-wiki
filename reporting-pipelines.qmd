@@ -1,5 +1,7 @@
 ---
 title: "Reporting Pipelines"
 author: "Jake Peters"
-date-modified: Oct. 5, 2023
+date-modified: Oct. 30, 2023
 ---
+
+![](images/export-from-gcp-to-box.drawio.svg)

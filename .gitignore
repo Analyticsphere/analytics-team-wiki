@@ -5,3 +5,4 @@
 /.quarto/
 *.Rproj*
 docs
+.DS_Store
