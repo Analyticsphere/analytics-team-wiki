@@ -5,3 +5,35 @@ date-modified: Oct. 30, 2023
 ---
 
 ![](images/export-from-gcp-to-box.drawio.svg)
+
+#### 1. Analyst pushes updated RMD script to GitHub Repo.
+
+All reports are developed and tested on an analysts notebook prior to being pushed to the GitHub Repo. The analyst will then submit a pull request. Once the maintainer of the repository, e.g., Jake, accepts/merges the pull request, a Cloud Build is triggered to update the container.
+
+#### 2. Cloud Build triggers containerization of reporting code
+
+The repository must contain:
+
+-   `cloudbuild.yaml` which configures the Cloud Build process
+
+-   `Dockerfile` which loads the dependecies needed in the Docker container
+
+-   `*_plumber_api.R` which wraps the reporting script in a Plumber api with parameters specifying which report to run
+
+-    a set of `*.RMD files` for each report generated
+
+#### 3. Cloud Scheduler triggers the cloud run via an API call at a specified time.
+
+Details about Cloud Scheduler will be documented elsewhere.
+
+#### 4. The RMD script queries BigQuery tables and generates a PDF report.
+
+#### 5. The PDF is delivered to a Cloud Storage Bucket.
+
+#### 6. A Cloud Function is triggered
+
+The Cloud Function, analyticsReport2Box, runs whenever a file is "finalized" in the Box folder, export_to_box. The Cloud Function parses the name of the PDF to extract the "\_boxfolder_xxxxxxxxxxxx" tag which indicates the ID of the destination folder.
+
+#### 7. The PDF is delivered to the destination Box folder.
+
+The the service account email associated with the Box app, NCI_BOX_GCP_CONNECT4CANCER_PROD, must be invited as a "Viewer Uploader" for the destination folder by the Box admin. If the PDF appears in the GCS Bucket but not in the Box folder, this is likely the issue.
