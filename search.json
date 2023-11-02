@@ -1,45 +1,10 @@
 [
   {
-    "objectID": "stakeholder-metrics-dashboard.html",
-    "href": "stakeholder-metrics-dashboard.html",
-    "title": "Stakeholder Metrics Dashboard",
+    "objectID": "reporting-pipelines.html",
+    "href": "reporting-pipelines.html",
+    "title": "Reporting Pipelines",
     "section": "",
-    "text": "All of the code that generates the stakeholder metrics dashboard is located in: Analyticsphere/stakeholderMetrics"
-  },
-  {
-    "objectID": "stakeholder-metrics-dashboard.html#code-location",
-    "href": "stakeholder-metrics-dashboard.html#code-location",
-    "title": "Stakeholder Metrics Dashboard",
-    "section": "",
-    "text": "All of the code that generates the stakeholder metrics dashboard is located in: Analyticsphere/stakeholderMetrics"
-  },
-  {
-    "objectID": "stakeholder-metrics-dashboard.html#operation-flow",
-    "href": "stakeholder-metrics-dashboard.html#operation-flow",
-    "title": "Stakeholder Metrics Dashboard",
-    "section": "Operation Flow",
-    "text": "Operation Flow"
-  },
-  {
-    "objectID": "stakeholder-metrics-dashboard.html#authentication",
-    "href": "stakeholder-metrics-dashboard.html#authentication",
-    "title": "Stakeholder Metrics Dashboard",
-    "section": "Authentication",
-    "text": "Authentication\nCurrently (10/27), RS and JP are working with George Zaki to implement the auth0 library. Using auth0 will allow us to authenticate users through GCP using their NIH credentials, all through the posit interface that the stakeholders dashboard is hosted on here.\nA few steps that we have had to take in order to make the auth0 library play nicely with the rshiny application:\n\nRegistered the application with GCP, this required Daniels approval and credentials on GCP to complete this step. By registering the app with GCP, we now have a client ID and client secret that will be passed to auth0.\nCreated a json file that looks identical to the yml file that GZ supplied us.\nname: myApp\nremote_url: 'https://appshare-dev.cancer.gov/content/499a6759-6174-495b-8950-7af21faa8a5f'\nauth0_config:\napi_url: https://bigquery.googleapis.com\naccess: token\nrequest: token\nscope: https://www.googleapis.com/auth/bigquery.readonly\ncredentials:\nkey: !expr Sys.getenv(\"AUTH0_CLIENTID\")\nsecret: !expr Sys.getenv(\"AUTH0_SECRET\")\nAssigned the GCP clientID and client secret from the GCP json file to .renvironment variables\n\nmore updates to come as this process continues**"
-  },
-  {
-    "objectID": "operations-metrics.html",
-    "href": "operations-metrics.html",
-    "title": "Operations Metrics",
-    "section": "",
-    "text": "This Operational Metrics Quarto records the changes, updates due to the requests from Connect Operational team or any changes in the Connect Recruitment data in GCP prod. All the changes /updates will be committed via git by Jing and approved and merged by Jake for the auto run via the pipeline GCP.\nIt is composed of two parts:\n\nThe pdf weekly Operational reports\nThe data outputs on any updates (shown below) which are saved in the individual folders in Box:\n\nParticipants with cancer history (monthly)\nWeekly log tables on the counts of study activities: blood collections, baseline survey completions, active/passive recruitment, response rate, incentive, refusal withdrawals/Data destruction requests, participants qualified for follow-up or analysis among verified participants of the ongoing Connect study recruitment\nThe incentive records of University of Chicago site and other NORC sites\nThe weekly lists of participants with refusal withdrawal/ data destruction requests (overall/by site)\nThe report will be delivered to Connect_DCEG_only/Connect Reports_DCEG ONLY/Metric Reports_DCEG and Connect_ALL/Connect Weekly Operations Metrics_ALL folder"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome to the Analytics Team Wiki",
-    "section": "",
-    "text": "Why a wiki?\nThis wiki is intended to gather the wealth of institutional knowledge that we have developed on this team into a persistent resource. This is especially useful for on-boarding new members, training colleagues to cover us while on PTO and for developing some overlapping knowledge across roles. We can also use this wiki to develop shared resources and formalize best practices that we would like to follow on our team as we grow and our work becomes more complex.\n\n\nWho should contribute?\nEveryone!\n\nIf you learn a new skill that could be useful to others, make a minimal tutorial and add it to the wiki!\nIf you create something new that will be part of the project for a while, add a documentation page to the wiki!\nIf you come across a resource that could be valuable to others, add a link to the wiki!\n\n\n\nHow to contribute\nYou can contribute a new page to the wiki in the form of an RMD file, QMD file, an MD file or an ipynb file. They can be easily added to the appropriate section using the _quarto.yml file, which ultimately configures how the site is rendered.\nThe code for this website live in this repo: https://github.com/Analyticsphere/analytics-team-wiki\nPushing commits to the main branch automatically updates the website via GitHub Pages using a GitHub actions workflow from this example:\nhttps://github.com/quarto-dev/quarto-actions/blob/main/examples/example-01-basics.md\nThis is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n\nRules\n\nNever share PII or PHI on this site!\nNever share secret tokens or passwords.\nDo not share links to Box or other resources that do not require authentication.\nWhen in doubt, ask Jake."
+    "text": "1. Analyst pushes updated RMD script to GitHub Repo.\nAll reports are developed and tested on an analysts notebook prior to being pushed to the GitHub Repo. The analyst will then submit a pull request. Once the maintainer of the repository, e.g., Jake, accepts/merges the pull request, a Cloud Build is triggered to update the container.\n\n\n2. Cloud Build triggers containerization of reporting code\nThe repository must contain:\n\ncloudbuild.yaml which configures the Cloud Build process\nDockerfile which loads the dependecies needed in the Docker container\n*_plumber_api.R which wraps the reporting script in a Plumber api with parameters specifying which report to run\na set of *.RMD files for each report generated\n\n\n\n3. Cloud Scheduler triggers the cloud run via an API call at a specified time.\nDetails about Cloud Scheduler will be documented elsewhere.\n\n\n4. The RMD script queries BigQuery tables and generates a PDF report.\n\n\n5. The PDF is delivered to a Cloud Storage Bucket.\n\n\n6. A Cloud Function is triggered\nThe Cloud Function, analyticsReport2Box, runs whenever a file is “finalized” in the Box folder, export_to_box. The Cloud Function parses the name of the PDF to extract the “_boxfolder_xxxxxxxxxxxx” tag which indicates the ID of the destination folder.\n\n\n7. The PDF is delivered to the destination Box folder.\nThe the service account email associated with the Box app, NCI_BOX_GCP_CONNECT4CANCER_PROD, must be invited as a “Viewer Uploader” for the destination folder by the Box admin. If the PDF appears in the GCS Bucket but not in the Box folder, this is likely the issue."
   },
   {
     "objectID": "qaqc.html",
@@ -47,6 +12,13 @@
     "title": "QAQC",
     "section": "",
     "text": "Here’s some documentation"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome to the Analytics Team Wiki",
+    "section": "",
+    "text": "Why a wiki?\nThis wiki is intended to gather the wealth of institutional knowledge that we have developed on this team into a persistent resource. This is especially useful for on-boarding new members, training colleagues to cover us while on PTO and for developing some overlapping knowledge across roles. We can also use this wiki to develop shared resources and formalize best practices that we would like to follow on our team as we grow and our work becomes more complex.\n\n\nWho should contribute?\nEveryone!\n\nIf you learn a new skill that could be useful to others, make a minimal tutorial and add it to the wiki!\nIf you create something new that will be part of the project for a while, add a documentation page to the wiki!\nIf you come across a resource that could be valuable to others, add a link to the wiki!\n\n\n\nHow to contribute\nYou can contribute a new page to the wiki in the form of an RMD file, QMD file, an MD file or an ipynb file. They can be easily added to the appropriate section using the _quarto.yml file, which ultimately configures how the site is rendered.\nThe code for this website live in this repo: https://github.com/Analyticsphere/analytics-team-wiki\nPushing commits to the main branch automatically updates the website via GitHub Pages using a GitHub actions workflow from this example:\nhttps://github.com/quarto-dev/quarto-actions/blob/main/examples/example-01-basics.md\nThis is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n\nRules\n\nNever share PII or PHI on this site!\nNever share secret tokens or passwords.\nDo not share links to Box or other resources that do not require authentication.\nWhen in doubt, ask Jake."
   },
   {
     "objectID": "optimizing-data-handling.html",
@@ -119,10 +91,45 @@
     "text": "This diagram depicts the high-level work flow for generating the BQ2 data.\n\n[Lucid Chart Link]\nKey Points:\n\nAll arrows indicate scheduled data transfers or SQL queries\nBQ2 will contain only de-identified data\nThe main BQ2 dataset will have the original Concept IDs from the Data Dictionary (except for derived variables like binned age)\nAll flattening, merging, cleaning and de-identification will occur in BQ1\nDerived materialized views will be used for the Stakeholder Metrics Dashboard (and other similar reports). They will reference the Main BQ2 data set, not the BQ1 data set. This will respect the PII barrier.\n\nWe can discuss this further as a group! Just wanted to jot this down so that we have a common reference."
   },
   {
+    "objectID": "operations-metrics.html",
+    "href": "operations-metrics.html",
+    "title": "Operations Metrics",
+    "section": "",
+    "text": "This Operational Metrics Quarto records the changes, updates due to the requests from Connect Operational team or any changes in the Connect Recruitment data in GCP prod. All the changes /updates will be committed via git by Jing and approved and merged by Jake for the auto run via the pipeline GCP.\nIt is composed of two parts:\n\nThe pdf weekly Operational reports\nThe data outputs on any updates (shown below) which are saved in the individual folders in Box:\n\nParticipants with cancer history (monthly)\nWeekly log tables on the counts of study activities: blood collections, baseline survey completions, active/passive recruitment, response rate, incentive, refusal withdrawals/Data destruction requests, participants qualified for follow-up or analysis among verified participants of the ongoing Connect study recruitment\nThe incentive records of University of Chicago site and other NORC sites\nThe weekly lists of participants with refusal withdrawal/ data destruction requests (overall/by site)\nThe report will be delivered to Connect_DCEG_only/Connect Reports_DCEG ONLY/Metric Reports_DCEG and Connect_ALL/Connect Weekly Operations Metrics_ALL folder"
+  },
+  {
     "objectID": "team-roles.html",
     "href": "team-roles.html",
     "title": "Team Roles",
     "section": "",
     "text": "Current Members\n\nNicole, Lead Analyst:\n\nThe boss\n\nJing\n\n\n\nKelsey\n\n\n\nJake Peters, Data Scientist:\n\nAutomate/maintain reporting pipelines in GCP\nDevelop/maintain flattening workflow for BigQuery tables\nAutomate QAQC workflow\nDevelop/maintain connection from GCP to Box\n\nMadhuri\n\n\n\nRebecca\n\n\n\n\n\n\nPast Members"
+  },
+  {
+    "objectID": "stakeholder-metrics-dashboard.html",
+    "href": "stakeholder-metrics-dashboard.html",
+    "title": "Stakeholder Metrics Dashboard",
+    "section": "",
+    "text": "All of the code that generates the stakeholder metrics dashboard is located in: Analyticsphere/stakeholderMetrics"
+  },
+  {
+    "objectID": "stakeholder-metrics-dashboard.html#code-location",
+    "href": "stakeholder-metrics-dashboard.html#code-location",
+    "title": "Stakeholder Metrics Dashboard",
+    "section": "",
+    "text": "All of the code that generates the stakeholder metrics dashboard is located in: Analyticsphere/stakeholderMetrics"
+  },
+  {
+    "objectID": "stakeholder-metrics-dashboard.html#operation-flow",
+    "href": "stakeholder-metrics-dashboard.html#operation-flow",
+    "title": "Stakeholder Metrics Dashboard",
+    "section": "Operation Flow",
+    "text": "Operation Flow"
+  },
+  {
+    "objectID": "stakeholder-metrics-dashboard.html#authentication",
+    "href": "stakeholder-metrics-dashboard.html#authentication",
+    "title": "Stakeholder Metrics Dashboard",
+    "section": "Authentication",
+    "text": "Authentication\nCurrently (10/27), RS and JP are working with George Zaki to implement the auth0 library. Using auth0 will allow us to authenticate users through GCP using their NIH credentials, all through the posit interface that the stakeholders dashboard is hosted on here.\nA few steps that we have had to take in order to make the auth0 library play nicely with the rshiny application:\n\nRegistered the application with GCP, this required Daniels approval and credentials on GCP to complete this step. By registering the app with GCP, we now have a client ID and client secret that will be passed to auth0.\nCreated a json file that looks identical to the yml file that GZ supplied us.\nname: myApp\nremote_url: 'https://appshare-dev.cancer.gov/content/499a6759-6174-495b-8950-7af21faa8a5f'\nauth0_config:\napi_url: https://bigquery.googleapis.com\naccess: token\nrequest: token\nscope: https://www.googleapis.com/auth/bigquery.readonly\ncredentials:\nkey: !expr Sys.getenv(\"AUTH0_CLIENTID\")\nsecret: !expr Sys.getenv(\"AUTH0_SECRET\")\nAssigned the GCP clientID and client secret from the GCP json file to .renvironment variables\n\nmore updates to come as this process continues**"
   }
 ]

@@ -363,8 +363,40 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 <p><img src="images/export-from-gcp-to-box.drawio.svg" class="img-fluid"></p>
+<section id="analyst-pushes-updated-rmd-script-to-github-repo." class="level4">
+<h4 class="anchored" data-anchor-id="analyst-pushes-updated-rmd-script-to-github-repo.">1. Analyst pushes updated RMD script to GitHub Repo.</h4>
+<p>All reports are developed and tested on an analysts notebook prior to being pushed to the GitHub Repo. The analyst will then submit a pull request. Once the maintainer of the repository, e.g., Jake, accepts/merges the pull request, a Cloud Build is triggered to update the container.</p>
+</section>
+<section id="cloud-build-triggers-containerization-of-reporting-code" class="level4">
+<h4 class="anchored" data-anchor-id="cloud-build-triggers-containerization-of-reporting-code">2. Cloud Build triggers containerization of reporting code</h4>
+<p>The repository must contain:</p>
+<ul>
+<li><p><code>cloudbuild.yaml</code> which configures the Cloud Build process</p></li>
+<li><p><code>Dockerfile</code> which loads the dependecies needed in the Docker container</p></li>
+<li><p><code>*_plumber_api.R</code> which wraps the reporting script in a Plumber api with parameters specifying which report to run</p></li>
+<li><p>a set of <code>*.RMD files</code> for each report generated</p></li>
+</ul>
+</section>
+<section id="cloud-scheduler-triggers-the-cloud-run-via-an-api-call-at-a-specified-time." class="level4">
+<h4 class="anchored" data-anchor-id="cloud-scheduler-triggers-the-cloud-run-via-an-api-call-at-a-specified-time.">3. Cloud Scheduler triggers the cloud run via an API call at a specified time.</h4>
+<p>Details about Cloud Scheduler will be documented elsewhere.</p>
+</section>
+<section id="the-rmd-script-queries-bigquery-tables-and-generates-a-pdf-report." class="level4">
+<h4 class="anchored" data-anchor-id="the-rmd-script-queries-bigquery-tables-and-generates-a-pdf-report.">4. The RMD script queries BigQuery tables and generates a PDF report.</h4>
+</section>
+<section id="the-pdf-is-delivered-to-a-cloud-storage-bucket." class="level4">
+<h4 class="anchored" data-anchor-id="the-pdf-is-delivered-to-a-cloud-storage-bucket.">5. The PDF is delivered to a Cloud Storage Bucket.</h4>
+</section>
+<section id="a-cloud-function-is-triggered" class="level4">
+<h4 class="anchored" data-anchor-id="a-cloud-function-is-triggered">6. A Cloud Function is triggered</h4>
+<p>The Cloud Function, analyticsReport2Box, runs whenever a file is “finalized” in the Box folder, export_to_box. The Cloud Function parses the name of the PDF to extract the “_boxfolder_xxxxxxxxxxxx” tag which indicates the ID of the destination folder.</p>
+</section>
+<section id="the-pdf-is-delivered-to-the-destination-box-folder." class="level4">
+<h4 class="anchored" data-anchor-id="the-pdf-is-delivered-to-the-destination-box-folder.">7. The PDF is delivered to the destination Box folder.</h4>
+<p>The the service account email associated with the Box app, NCI_BOX_GCP_CONNECT4CANCER_PROD, must be invited as a “Viewer Uploader” for the destination folder by the Box admin. If the PDF appears in the GCS Bucket but not in the Box folder, this is likely the issue.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
