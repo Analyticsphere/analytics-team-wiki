@@ -1,7 +1,7 @@
 ---
 title: "Reporting Pipelines"
 author: "Jake Peters"
-date-modified: Oct. 30, 2023
+date-modified: Nov. 2, 2023
 ---
 
 ![](images/export-from-gcp-to-box.drawio.svg)
@@ -20,7 +20,8 @@ The repository must contain:
 
 -   `*_plumber_api.R` which wraps the reporting script in a Plumber api with parameters specifying which report to run
 
--    a set of `*.RMD files` for each report generated
+-   a set of `*.RMD files` for each report generated
+
 
 #### 3. Cloud Scheduler triggers the cloud run via an API call at a specified time.
 
@@ -37,3 +38,17 @@ The Cloud Function, analyticsReport2Box, runs whenever a file is "finalized" in 
 #### 7. The PDF is delivered to the destination Box folder.
 
 The the service account email associated with the Box app, NCI_BOX_GCP_CONNECT4CANCER_PROD, must be invited as a "Viewer Uploader" for the destination folder by the Box admin. If the PDF appears in the GCS Bucket but not in the Box folder, this is likely the issue.
+
+#### Existing Reporting Pipelines:
+
+As of November 2, 2023 there are 4 existing reporting pipelines:
+
+1.  [QAQC](https://analyticsphere.github.io/analytics-team-wiki/qaqc.html)
+
+2.  [Survey Metrics](https://analyticsphere.github.io/analytics-team-wiki/survey-metrics.html)
+
+3.  [Biospecimen Metrics](https://analyticsphere.github.io/analytics-team-wiki/biospecimen-metrics.html)
+
+4.  [Operations Metrics](https://analyticsphere.github.io/analytics-team-wiki/operations-metrics.html)
+
+Note: For all pipeline related help, contact Jake Peters or Daniel Russ.
