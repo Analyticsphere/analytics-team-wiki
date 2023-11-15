@@ -333,7 +333,13 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#naming-convention-for-loop-variables" id="toc-naming-convention-for-loop-variables" class="nav-link active" data-scroll-target="#naming-convention-for-loop-variables">Naming Convention for Loop Variables</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -382,8 +388,41 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Derived materialized views will be used for the Stakeholder Metrics Dashboard (and other similar reports). They will reference the Main BQ2 data set, not the BQ1 data set. This will respect the PII barrier.</p></li>
 </ul>
 <p>We can discuss this further as a group! Just wanted to jot this down so that we have a common reference.</p>
+<section id="naming-convention-for-loop-variables" class="level3">
+<h3 class="anchored" data-anchor-id="naming-convention-for-loop-variables">Naming Convention for Loop Variables</h3>
+<p>Example: 700889863: Sibling [<strong>X</strong>]- How old was your [SIBLING INITIALS OR NICKNAME/YOUR SIBLING] when they were first told by a doctor or other health professional that they have or had prostate cancer?</p>
+<table class="table">
+<tbody>
+<tr class="odd">
+<td><strong>X</strong></td>
+<td><strong>Year at diagnosis</strong></td>
+<td><strong>Age at diagnosis</strong></td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>D_700889863.D_261863326_1</td>
+<td>D_700889863.D_700889863_1</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>D_700889863.D_261863326_2</td>
+<td>D_700889863.D_700889863_2</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>D_700889863.D_261863326_3</td>
+<td>D_700889863.D_700889863_3</td>
+</tr>
+<tr class="odd">
+<td>n</td>
+<td>D_700889863.D_261863326_n</td>
+<td>D_700889863.D_700889863_n</td>
+</tr>
+</tbody>
+</table>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
