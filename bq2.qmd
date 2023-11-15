@@ -25,3 +25,15 @@ Key Points:
 -   Derived materialized views will be used for the Stakeholder Metrics Dashboard (and other similar reports). They will reference the Main BQ2 data set, not the BQ1 data set. This will respect the PII barrier.
 
 We can discuss this further as a group! Just wanted to jot this down so that we have a common reference.
+
+### Naming Convention for Loop Variables
+
+Example: 700889863: Sibling \[**X**\]- How old was your \[SIBLING INITIALS OR NICKNAME/YOUR SIBLING\] when they were first told by a doctor or other health professional that they have or had prostate cancer?
+
+|       |                           |                           |
+|-------|---------------------------|---------------------------|
+| **X** | **Year at diagnosis**     | **Age at diagnosis**      |
+| 1     | D_700889863.D_261863326_1 | D_700889863.D_700889863_1 |
+| 2     | D_700889863.D_261863326_2 | D_700889863.D_700889863_2 |
+| 3     | D_700889863.D_261863326_3 | D_700889863.D_700889863_3 |
+| n     | D_700889863.D_261863326_n | D_700889863.D_700889863_n |
