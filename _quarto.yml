@@ -44,6 +44,8 @@ website:
           url: https://github.com/Analyticsphere/weekly_ccc_report_gcp_pipeline
         - text: Analyticsphere/CIDTool
           url: https://github.com/Analyticsphere/CIDTool
+        - text: Analyticsverese
+          url: https://github.com/Analyticverse
     
   sidebar:
     logo: logo.png
