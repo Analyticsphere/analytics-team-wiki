@@ -3,16 +3,21 @@ title: "BQ2 Work Flow"
 author: Jake Peters
 date-modified: Oct., 2023
 ---
+### Issue Tracker
+Progress on BQ2 is being tracked here: https://github.com/orgs/Analyticsphere/projects/9
 
+### Diagram
 This diagram depicts the high-level work flow for generating the BQ2 data.
 
 ![](images/bq2-setup.png)
 
 \[[Lucid Chart Link](https://lucid.app/lucidchart/7d4864f5-3e19-4210-8da8-99a6c98ff6b7/edit?viewport_loc=-1156%2C432%2C3328%2C1428%2C0_0&invitationId=inv_45fd4ac7-8213-43b5-951d-240389f6b138)\]\
 
+### Repository
+
 All code used for implementing BQ2 will live in this repo: \[[bq2](https://github.com/Analyticsphere/bq2)\]\
 
-Key Points:
+### Key Points:
 
 -   All arrows indicate scheduled data transfers or SQL queries
 
