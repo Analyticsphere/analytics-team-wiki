@@ -337,7 +337,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#naming-convention-for-loop-variables" id="toc-naming-convention-for-loop-variables" class="nav-link active" data-scroll-target="#naming-convention-for-loop-variables">Naming Convention for Loop Variables</a></li>
+  <li><a href="#issue-tracker" id="toc-issue-tracker" class="nav-link active" data-scroll-target="#issue-tracker">Issue Tracker</a></li>
+  <li><a href="#diagram" id="toc-diagram" class="nav-link" data-scroll-target="#diagram">Diagram</a></li>
+  <li><a href="#repository" id="toc-repository" class="nav-link" data-scroll-target="#repository">Repository</a></li>
+  <li><a href="#key-points" id="toc-key-points" class="nav-link" data-scroll-target="#key-points">Key Points:</a></li>
+  <li><a href="#naming-convention-for-loop-variables" id="toc-naming-convention-for-loop-variables" class="nav-link" data-scroll-target="#naming-convention-for-loop-variables">Naming Convention for Loop Variables</a></li>
   </ul>
 </nav>
     </div>
@@ -373,13 +377,24 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<section id="issue-tracker" class="level3">
+<h3 class="anchored" data-anchor-id="issue-tracker">Issue Tracker</h3>
+<p>Progress on BQ2 is being tracked here: https://github.com/orgs/Analyticsphere/projects/9</p>
+</section>
+<section id="diagram" class="level3">
+<h3 class="anchored" data-anchor-id="diagram">Diagram</h3>
 <p>This diagram depicts the high-level work flow for generating the BQ2 data.</p>
 <p><img src="images/bq2-setup.png" class="img-fluid"></p>
 <p>[<a href="https://lucid.app/lucidchart/7d4864f5-3e19-4210-8da8-99a6c98ff6b7/edit?viewport_loc=-1156%2C432%2C3328%2C1428%2C0_0&amp;invitationId=inv_45fd4ac7-8213-43b5-951d-240389f6b138">Lucid Chart Link</a>]<br>
 </p>
+</section>
+<section id="repository" class="level3">
+<h3 class="anchored" data-anchor-id="repository">Repository</h3>
 <p>All code used for implementing BQ2 will live in this repo: [<a href="https://github.com/Analyticsphere/bq2">bq2</a>]<br>
 </p>
-<p>Key Points:</p>
+</section>
+<section id="key-points" class="level3">
+<h3 class="anchored" data-anchor-id="key-points">Key Points:</h3>
 <ul>
 <li><p>All arrows indicate scheduled data transfers or SQL queries</p></li>
 <li><p>BQ2 will contain only de-identified data</p></li>
@@ -388,6 +403,7 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Derived materialized views will be used for the Stakeholder Metrics Dashboard (and other similar reports). They will reference the Main BQ2 data set, not the BQ1 data set. This will respect the PII barrier.</p></li>
 </ul>
 <p>We can discuss this further as a group! Just wanted to jot this down so that we have a common reference.</p>
+</section>
 <section id="naming-convention-for-loop-variables" class="level3">
 <h3 class="anchored" data-anchor-id="naming-convention-for-loop-variables">Naming Convention for Loop Variables</h3>
 <p>Example: 700889863: Sibling [<strong>X</strong>]- How old was your [SIBLING INITIALS OR NICKNAME/YOUR SIBLING] when they were first told by a doctor or other health professional that they have or had prostate cancer?</p>
