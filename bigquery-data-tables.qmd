@@ -3,3 +3,168 @@ title: "BigQuery Data Tables"
 author: "Jake Peters"
 date-modified: Oct. 5, 2023
 ---
+
+## Database Flow Chart
+
+```{mermaid}
+flowchart LR
+
+ subgraph BQ1["BQ1"]
+    C["Connect"]
+    FC["FlatConnect"]
+    CC["CleanConnect"]
+    DC["DeIdConnnect"]
+  end
+
+    C -- Flatten --> FC
+    FC -- Clean --> CC
+    CC -- De-identify --> DC
+    F("Firestore") == "Scheduled\nTransfer" ==> C
+
+    style F fill:#f5cc84,stroke:#333,stroke-width:2px 
+    style BQ1 fill:#D6EAF8,stroke:#333,stroke-width:2px
+```
+
+- Connect: Raw data imported from firestore
+- FlatConnect: Flattened version of raw data
+- CleanConnect: Cleaned, Merged, Currated
+- DeIdConnect: A de-identified version of CleanConnect
+
+## Entity-Relationship Diagram
+
+```{mermaid}
+erDiagram 
+    participants {
+        int Connect_ID PK
+        string verificationStatus
+        string HIPPAConsent
+    }
+    module1 {
+        int Connect_ID FK
+    }
+    module2 {
+        int Connect_ID FK
+    }
+    module3 {
+        int Connect_ID FK
+    }
+    module4 {
+        int Connect_ID FK
+    }
+    clinicalBioSurvey{
+        int Connect_ID FK
+    }
+    bioSurvey{
+        int Connect_ID FK
+    }
+    menstrualSurvey{
+        int Connect_ID FK
+    }
+    biospecimen {
+        int accessionID PK
+        int Connect_ID FK
+    }
+    kitAssembly {
+        int kitID PK
+        int Connect_ID FK
+    }
+    notifications {
+        int notificationID PK
+        int Connect_ID FK
+    }
+    boxes {
+        int boxID PK
+        int Connect_ID FK
+    }
+    
+    module1           |o--|| participants: take
+    module2           |o--|| participants: take
+    module3           |o--|| participants: take
+    module4           |o--|| participants: take
+    clinicalBioSurvey ||--|| participants: take
+    
+    participants ||--|| bioSurvey: take
+    participants ||--|o menstrualSurvey: take
+    participants ||--|{ biospecimen: give
+    participants ||--|{ kitAssembly: give
+    participants ||--|{ notifications: receive
+```
+## Tables
+
+#### participants
+
+-   **Title**: Recruitment
+-   **Secondary Source CID**:
+-   **Descripton**: These data track the progress of recruits and participants through the study. This includes information about verification status, consent, demographic information, etcetera. This table can be joined to all most other Connect datasets using the `Connect_ID` or `token`.
+
+#### module1
+
+-   **Title**: Background and Overall Health
+-   **Secondary Source CID**:
+-   **Description**:
+
+#### module2
+
+-   **Title**: Medications, Reproductive Health, Exercise, and Sleep
+-   **Secondary Source CID**: 745268907
+-   **Description**:
+
+#### module3
+
+-   **Title**: Smoking, Alcohol, and Sun Exposure
+-   **Secondary Source CID**:
+-   Description:
+
+#### module4
+
+-   **Title**: Where You Live and Work:
+-   **Secondary Source CID**:
+-   **Description**:
+
+#### clinicalBioSurvey
+
+-   **Title**:
+-   **Secondary Source CID**:
+-   **Description**:
+
+#### bioSurvey
+
+-   **Title**:
+-   **Secondary Source CID**:
+-   **Description**:
+
+#### menstrualSurvey
+
+-   **Title**:
+-   **Secondary Source CID**:
+-   **Description**:
+
+#### covid19Survey
+
+-   **Title**:
+-   **Secondary Source CID**:
+-   **Description**:
+
+#### biospecimen
+
+-   **Title**:
+-   **Secondary Source CID**:
+-   **Description**:
+
+#### kitAssembly
+
+-   **Title**:
+-   **Secondary Source CID**:
+-   **Description**:
+
+#### notifications
+
+-   **Title**:
+-   **Secondary Source CID**:
+-   **Description**:
+
+#### boxes
+
+-   **Title**:
+-   **Secondary Source CID**:
+-   **Description**:
