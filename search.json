@@ -1,5 +1,33 @@
 [
   {
+    "objectID": "bigquery-data-tables.html",
+    "href": "bigquery-data-tables.html",
+    "title": "BigQuery Data Tables",
+    "section": "",
+    "text": "flowchart LR\n\n subgraph BQ1[\"BQ1\"]\n    C[\"Connect\"]\n    FC[\"FlatConnect\"]\n    CC[\"CleanConnect\"]\n    DC[\"DeIdConnnect\"]\n  end\n\n    C -- Flatten --&gt; FC\n    FC -- Clean --&gt; CC\n    CC -- De-identify --&gt; DC\n    F(\"Firestore\") == \"Scheduled\\nTransfer\" ==&gt; C\n\n    style F fill:#f5cc84,stroke:#333,stroke-width:2px \n    style BQ1 fill:#D6EAF8,stroke:#333,stroke-width:2px\n\n\n\n\n\n\nConnect: Raw data imported from firestore\nFlatConnect: Flattened version of raw data\nCleanConnect: Cleaned, Merged, Currated\nDeIdConnect: A de-identified version of CleanConnect"
+  },
+  {
+    "objectID": "bigquery-data-tables.html#database-flow-chart",
+    "href": "bigquery-data-tables.html#database-flow-chart",
+    "title": "BigQuery Data Tables",
+    "section": "",
+    "text": "flowchart LR\n\n subgraph BQ1[\"BQ1\"]\n    C[\"Connect\"]\n    FC[\"FlatConnect\"]\n    CC[\"CleanConnect\"]\n    DC[\"DeIdConnnect\"]\n  end\n\n    C -- Flatten --&gt; FC\n    FC -- Clean --&gt; CC\n    CC -- De-identify --&gt; DC\n    F(\"Firestore\") == \"Scheduled\\nTransfer\" ==&gt; C\n\n    style F fill:#f5cc84,stroke:#333,stroke-width:2px \n    style BQ1 fill:#D6EAF8,stroke:#333,stroke-width:2px\n\n\n\n\n\n\nConnect: Raw data imported from firestore\nFlatConnect: Flattened version of raw data\nCleanConnect: Cleaned, Merged, Currated\nDeIdConnect: A de-identified version of CleanConnect"
+  },
+  {
+    "objectID": "bigquery-data-tables.html#entity-relationship-diagram",
+    "href": "bigquery-data-tables.html#entity-relationship-diagram",
+    "title": "BigQuery Data Tables",
+    "section": "Entity-Relationship Diagram",
+    "text": "Entity-Relationship Diagram\n\n\n\n\nerDiagram \n    participants {\n        int Connect_ID PK\n        string verificationStatus\n        string HIPPAConsent\n    }\n    module1 {\n        int Connect_ID FK\n    }\n    module2 {\n        int Connect_ID FK\n    }\n    module3 {\n        int Connect_ID FK\n    }\n    module4 {\n        int Connect_ID FK\n    }\n    clinicalBioSurvey{\n        int Connect_ID FK\n    }\n    bioSurvey{\n        int Connect_ID FK\n    }\n    menstrualSurvey{\n        int Connect_ID FK\n    }\n    biospecimen {\n        int accessionID PK\n        int Connect_ID FK\n    }\n    kitAssembly {\n        int kitID PK\n        int Connect_ID FK\n    }\n    notifications {\n        int notificationID PK\n        int Connect_ID FK\n    }\n    boxes {\n        int boxID PK\n        int Connect_ID FK\n    }\n    \n    module1           |o--|| participants: take\n    module2           |o--|| participants: take\n    module3           |o--|| participants: take\n    module4           |o--|| participants: take\n    clinicalBioSurvey ||--|| participants: take\n    \n    participants ||--|| bioSurvey: take\n    participants ||--|o menstrualSurvey: take\n    participants ||--|{ biospecimen: give\n    participants ||--|{ kitAssembly: give\n    participants ||--|{ notifications: receive"
+  },
+  {
+    "objectID": "bigquery-data-tables.html#tables",
+    "href": "bigquery-data-tables.html#tables",
+    "title": "BigQuery Data Tables",
+    "section": "Tables",
+    "text": "Tables\n\nparticipants\n\nTitle: Recruitment\nSecondary Source CID:\nDescripton: These data track the progress of recruits and participants through the study. This includes information about verification status, consent, demographic information, etcetera. This table can be joined to all most other Connect datasets using the Connect_ID or token.\n\n\n\nmodule1\n\nTitle: Background and Overall Health\nSecondary Source CID:\nDescription:\n\n\n\nmodule2\n\nTitle: Medications, Reproductive Health, Exercise, and Sleep\nSecondary Source CID: 745268907\nDescription:\n\n\n\nmodule3\n\nTitle: Smoking, Alcohol, and Sun Exposure\nSecondary Source CID:\nDescription:\n\n\n\nmodule4\n\nTitle: Where You Live and Work:\nSecondary Source CID:\nDescription:\n\n\n\nclinicalBioSurvey\n\nTitle:\nSecondary Source CID:\nDescription:\n\n\n\nbioSurvey\n\nTitle:\nSecondary Source CID:\nDescription:\n\n\n\nmenstrualSurvey\n\nTitle:\nSecondary Source CID:\nDescription:\n\n\n\ncovid19Survey\n\nTitle:\nSecondary Source CID:\nDescription:\n\n\n\nbiospecimen\n\nTitle:\nSecondary Source CID:\nDescription:\n\n\n\nkitAssembly\n\nTitle:\nSecondary Source CID:\nDescription:\n\n\n\nnotifications\n\nTitle:\nSecondary Source CID:\nDescription:\n\n\n\nboxes\n\nTitle:\nSecondary Source CID:\nDescription:"
+  },
+  {
     "objectID": "contributing-to-github.html",
     "href": "contributing-to-github.html",
     "title": "GitHub Contributions Tutorial",
