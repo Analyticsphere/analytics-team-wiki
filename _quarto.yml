@@ -77,6 +77,8 @@ website:
           - href: contributing-to-github.qmd
           - href: optimizing-data-handling.qmd
           - href: style-guide.qmd
+          - href: debugging_docker_container_on_gcp.md
+            text: Debug Container on GCP
       
       - section: Training
       

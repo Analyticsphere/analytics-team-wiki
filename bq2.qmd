@@ -3,10 +3,13 @@ title: "BQ2 Work Flow"
 author: Jake Peters
 date-modified: Oct., 2023
 ---
+
 ### Issue Tracker
+
 Progress on BQ2 is being tracked here: https://github.com/orgs/Analyticsphere/projects/9
 
 ### Diagram
+
 This diagram depicts the high-level work flow for generating the BQ2 data.
 
 ![](images/bq2-setup.png)
