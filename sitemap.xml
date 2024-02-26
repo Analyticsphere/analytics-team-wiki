@@ -1,67 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://github.com/Analyticsphere/analytics-team-wiki/biospecimen-metrics.html</loc>
-    <lastmod>2024-01-23T15:43:46.670Z</lastmod>
+    <loc>https://Analyticsphere.github.io/analytics-team-wiki/team-roles.html</loc>
+    <lastmod>2024-02-26T14:17:08.154Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/Analyticsphere/analytics-team-wiki/bigquery-data-tables.html</loc>
-    <lastmod>2024-01-23T15:43:46.122Z</lastmod>
+    <loc>https://Analyticsphere.github.io/analytics-team-wiki/biospecimen-metrics.html</loc>
+    <lastmod>2024-02-26T14:17:08.134Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/Analyticsphere/analytics-team-wiki/contributing-to-github.html</loc>
-    <lastmod>2024-01-23T15:43:45.538Z</lastmod>
+    <loc>https://Analyticsphere.github.io/analytics-team-wiki/flattening.html</loc>
+    <lastmod>2024-02-26T14:17:08.134Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/Analyticsphere/analytics-team-wiki/optimizing-data-handling.html</loc>
-    <lastmod>2024-01-23T15:43:44.922Z</lastmod>
+    <loc>https://Analyticsphere.github.io/analytics-team-wiki/stakeholder-metrics-dashboard.html</loc>
+    <lastmod>2024-02-26T14:17:08.154Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/Analyticsphere/analytics-team-wiki/operations-metrics.html</loc>
-    <lastmod>2024-01-23T15:43:44.078Z</lastmod>
+    <loc>https://Analyticsphere.github.io/analytics-team-wiki/qaqc.html</loc>
+    <lastmod>2024-02-26T14:17:08.154Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/Analyticsphere/analytics-team-wiki/index.html</loc>
-    <lastmod>2024-01-23T15:43:43.542Z</lastmod>
+    <loc>https://Analyticsphere.github.io/analytics-team-wiki/style-guide.html</loc>
+    <lastmod>2024-02-26T14:17:08.154Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/Analyticsphere/analytics-team-wiki/delivery-of-site-data-to-box.html</loc>
-    <lastmod>2024-01-23T15:43:43.014Z</lastmod>
+    <loc>https://Analyticsphere.github.io/analytics-team-wiki/reporting-pipelines.html</loc>
+    <lastmod>2024-02-26T14:17:08.154Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/Analyticsphere/analytics-team-wiki/flattening.html</loc>
-    <lastmod>2024-01-23T15:43:42.486Z</lastmod>
+    <loc>https://Analyticsphere.github.io/analytics-team-wiki/delivery-of-site-data-to-box.html</loc>
+    <lastmod>2024-02-26T14:17:08.134Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/Analyticsphere/analytics-team-wiki/style-guide.html</loc>
-    <lastmod>2024-01-23T15:43:41.954Z</lastmod>
+    <loc>https://Analyticsphere.github.io/analytics-team-wiki/bigquery-data-tables.html</loc>
+    <lastmod>2024-02-26T14:17:08.134Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/Analyticsphere/analytics-team-wiki/gcp-box-connection.html</loc>
-    <lastmod>2024-01-23T15:43:42.750Z</lastmod>
+    <loc>https://Analyticsphere.github.io/analytics-team-wiki/survey-metrics.html</loc>
+    <lastmod>2024-02-26T14:17:08.154Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/Analyticsphere/analytics-team-wiki/team-roles.html</loc>
-    <lastmod>2024-01-23T15:43:43.262Z</lastmod>
+    <loc>https://Analyticsphere.github.io/analytics-team-wiki/index.html</loc>
+    <lastmod>2024-02-26T14:17:08.154Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/Analyticsphere/analytics-team-wiki/stakeholder-metrics-dashboard.html</loc>
-    <lastmod>2024-01-23T15:43:43.814Z</lastmod>
+    <loc>https://Analyticsphere.github.io/analytics-team-wiki/optimizing-data-handling.html</loc>
+    <lastmod>2024-02-26T14:17:08.154Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/Analyticsphere/analytics-team-wiki/survey-metrics.html</loc>
-    <lastmod>2024-01-23T15:43:44.322Z</lastmod>
+    <loc>https://Analyticsphere.github.io/analytics-team-wiki/operations-metrics.html</loc>
+    <lastmod>2024-02-26T14:17:08.154Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/Analyticsphere/analytics-team-wiki/reporting-pipelines.html</loc>
-    <lastmod>2024-01-23T15:43:45.206Z</lastmod>
+    <loc>https://Analyticsphere.github.io/analytics-team-wiki/debugging_docker_container_on_gcp.html</loc>
+    <lastmod>2024-02-26T14:17:08.134Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/Analyticsphere/analytics-team-wiki/qaqc.html</loc>
-    <lastmod>2024-01-23T15:43:45.774Z</lastmod>
+    <loc>https://Analyticsphere.github.io/analytics-team-wiki/gcp-box-connection.html</loc>
+    <lastmod>2024-02-26T14:17:08.134Z</lastmod>
   </url>
   <url>
-    <loc>https://github.com/Analyticsphere/analytics-team-wiki/bq2.html</loc>
-    <lastmod>2024-01-23T15:43:46.426Z</lastmod>
+    <loc>https://Analyticsphere.github.io/analytics-team-wiki/contributing-to-github.html</loc>
+    <lastmod>2024-02-26T14:17:08.134Z</lastmod>
+  </url>
+  <url>
+    <loc>https://Analyticsphere.github.io/analytics-team-wiki/bq2.html</loc>
+    <lastmod>2024-02-26T14:17:08.134Z</lastmod>
   </url>
 </urlset>

@@ -1,1 +1,1 @@
-Sitemap: https://github.com/Analyticsphere/analytics-team-wiki/sitemap.xml
+Sitemap: https://Analyticsphere.github.io/analytics-team-wiki/sitemap.xml

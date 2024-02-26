@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Kelsey Dowling">
+<meta name="author" content="Jake Peters">
 
-<title>c4cp Analytics Team Wiki - Biospecimen Metrics</title>
+<title>c4cp Analytics Team Wiki - Debugging Docker Container in GCP Cloud Console</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -178,7 +178,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./bq2.html">Documentation</a></li><li class="breadcrumb-item"><a href="./biospecimen-metrics.html">Biospecimen Metrics</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./contributing-to-github.html">Tutorials</a></li><li class="breadcrumb-item"><a href="./debugging_docker_container_on_gcp.html">Debug Container on GCP</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -274,7 +274,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./biospecimen-metrics.html" class="sidebar-item-text sidebar-link active">
+  <a href="./biospecimen-metrics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Biospecimen Metrics</span></a>
   </div>
 </li>
@@ -321,7 +321,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./debugging_docker_container_on_gcp.html" class="sidebar-item-text sidebar-link">
+  <a href="./debugging_docker_container_on_gcp.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Debug Container on GCP</span></a>
   </div>
 </li>
@@ -345,14 +345,20 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#tips-tricks" id="toc-tips-tricks" class="nav-link active" data-scroll-target="#tips-tricks">Tips &amp; Tricks:</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./bq2.html">Documentation</a></li><li class="breadcrumb-item"><a href="./biospecimen-metrics.html">Biospecimen Metrics</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./contributing-to-github.html">Tutorials</a></li><li class="breadcrumb-item"><a href="./debugging_docker_container_on_gcp.html">Debug Container on GCP</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Biospecimen Metrics</h1>
+<h1 class="title">Debugging Docker Container in GCP Cloud Console</h1>
 </div>
 
 
@@ -362,7 +368,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Kelsey Dowling </p>
+             <p>Jake Peters </p>
           </div>
   </div>
     
@@ -370,7 +376,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 5, 2023</p>
+      <p class="date-modified">February 22, 2024</p>
     </div>
   </div>
     
@@ -381,8 +387,85 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<ol type="1">
+<li><p><strong>Open</strong> the <code>Google Cloud Shell</code> in GCP Project <img src="images/docker-container-tutorial/open_cloud_shell.png" class="img-fluid"></p></li>
+<li><p>Set default project:</p>
+<ul>
+<p><code>gcloud config set project &lt;paste-project-id&gt;</code></p>
+</ul>
+<p><img src="images/docker-container-tutorial/set_project.png" class="img-fluid"></p></li>
+<li><p>In second tab,</p>
+<ul>
+<li><strong>Open</strong> <code>Cloud Run</code></li>
+<li><strong>Navigate</strong> to service of interest (e.g., <code>ccc-weekly-report-api</code>)</li>
+<li><strong>Click</strong> the <code>REVISIONS</code> tab</li>
+<li><strong>Copy</strong> the <code>Image URL</code> from the panel at right <img src="images/docker-container-tutorial/copy_img_url.png" class="img-fluid"></li>
+</ul></li>
+<li><p>To pull the docker image in <code>Cloud Shell</code>, type</p>
+<ul>
+<p><code>docker pull &lt;paste-image-url&gt;</code></p>
+</ul>
+<p><img src="images/docker-container-tutorial/pull_docker_img.png" class="img-fluid"></p></li>
+<li><p>To confirm that the image is loaded, type:</p>
+<ul>
+<p><code>docker image list</code></p>
+</ul>
+<p><img src="images/docker-container-tutorial/confirm_img_loaded.png" class="img-fluid"></p></li>
+<li><p>In seperate tab, <strong>Navigate</strong> to GitHub repo for pipeline and <strong>Copy</strong> the url. <img src="images/docker-container-tutorial/copy_github_repo_url.png" class="img-fluid"></p></li>
+<li><p>To clone the repo in the <code>Cloud Shell</code>, type:</p>
+<ul>
+<p><code>git clone &lt;paste-gh-repo-url&gt;</code></p>
+</ul>
+<p>Note that you will be prompted to use your github username and password in order to clone the repo. If your password fails, you will need to use a <code>personal access token</code> instead. <br> <img src="images/docker-container-tutorial/clone_github_repo.png" class="img-fluid"></p></li>
+<li><p>Explore the directory with <code>ls</code> and <code>cd</code> commands. You should now be able to see a <code>report.Rmd</code> file, a <code>cloudbuild.yaml</code> file, a <code>Dockerfile</code>, and a <code>plumber_api.R</code> file. The name of the R files will differ from pipeline to pipeline of course. <br> <img src="images/docker-container-tutorial/explore_directory.png" class="img-fluid"></p></li>
+<li><p>Once in the directory containing the <code>Dockerfile</code>, type:</p>
+<ul>
+<p><code>docker build .</code></p>
+</ul>
+<p>to build the container. This may take 5-15 minutes, depending on how many dependencies (e.g., R packages, pandoc) must be loaded. <img src="images/docker-container-tutorial/build_docker_img.png" class="img-fluid"></p></li>
+<li><p>To see the image that was just built, type:</p>
+<ul>
+<p><code>docker image ls</code></p>
+</ul>
+<p>You might see the image that was built by cloud build and the one that was just built manually from the github repo. <img src="images/docker-container-tutorial/view_docker_img.png" class="img-fluid"></p></li>
+<li><p>This is unnecessary, but if you would like to keep them straight, you can apply a <code>tag</code> to label them:</p>
+<ul>
+<p><code>docker tag &lt;image id&gt; &lt;repository_name&gt;:&lt;tag_name&gt;</code></p>
+</ul>
+<p><img src="images/docker-container-tutorial/tag_docker_containers.png" class="img-fluid"> <strong>Note</strong> that the one I labeled <code>from_github:current_img</code> is the one that I build directly from the github repo. The one that called <code>gcr.io*:from_cloud_build</code> is the one that Cloud Build produced.</p></li>
+<li><p>To enter the container, type:</p>
+<ul>
+<p><code>docker run -it --env PORT=8080 /bin/bash &lt;image id&gt;</code></p>
+</ul>
+<p><img src="images/docker-container-tutorial/run_docker_container.png" class="img-fluid"></p></li>
+<li><p>To execute a script for debugging, enter something like:</p>
+<ul>
+<p><code>Rscript -e "bigrquery::bq_auth()"</code></p>
+</ul>
+<ul>
+<p><code>Rscript -e "rmarkdown::render('report.Rmd')"</code> <img src="images/docker-container-tutorial/run_r_script.png" class="img-fluid"></p>
+</ul></li></ol>
+<section id="tips-tricks" class="level2">
+<h2 class="anchored" data-anchor-id="tips-tricks">Tips &amp; Tricks:</h2>
+<ul>
+<li>Get the latest docker image:
+<ul>
+<code>IMAGE_ID=$(docker image ls -q | head -qn1)</code>
+</ul>
+<ul>
+<li><code>docker image ls -q</code>: Lists Docker images and outputs only their IDs.</li>
+<li><code>head -qn1</code>: Takes the first line of the output, which corresponds to the ID of the latest image.</li>
+<li>So, <code>IMAGE_ID</code> will store the ID of the latest Docker image.</li>
+</ul></li>
+<li>Run the latest docker container:
+<ul>
+<code>docker run -it --env PORT=8080 /bin/bash $IMAGE_ID</code>
+</ul></li>
+<li>Consider configuring all of this workflow as a bash script for each pipeline that you would like to debug</li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
