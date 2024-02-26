@@ -1,7 +1,49 @@
 ---
 title: "QAQC"
 author: "Jake Peters"
-date-modified: Oct. 5, 2023
+date-modified: Jan. 30, 2024
 ---
 
-Here's some documentation
+Code Structure
+
+```{mermaid}
+flowchart LR
+
+    R[qc_rules_*.xlsx]
+    BQ[(BigQuery)]
+    C[config.yaml]
+    
+    subgraph API[Google Cloud Run \n plumber_api.R]
+      QC[qaqc.R]
+    end
+    
+    subgraph GCS[Google Cloud Storage]
+      REP["qc_report_*_boxfolder_{folderID}.xlsx"]
+    end
+    
+    subgraph BOX[Box.com]
+      REP2[qc_report_*.xlsx]
+    end
+    
+    subgraph CF["Google Cloud Function \n (event-triggered)"]
+    end
+    
+    subgraph CS[Google Cloud Scheduler]
+    end
+    
+    CS --trigger--> API
+    C --input--> API
+    R --input--> QC
+    BQ --query--> QC
+    QC --"output"--> REP
+    REP --input--> CF
+    CF --"output"--> REP2
+    
+    style API fill:#D6EAF8,stroke:black,stroke-width:3px
+    style GCS fill:#D6EAF8,stroke:black,stroke-width:3px
+    style CF fill:#D6EAF8,stroke:black,stroke-width:3px
+    style CS fill:#D6EAF8,stroke:black,stroke-width:3px
+    style BOX fill:#f5cc84,stroke:black,stroke-width:3px 
+    
+
+```
