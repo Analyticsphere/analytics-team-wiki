@@ -1,0 +1,14 @@
+---
+title: Connect for Cancer Prevention Study Documentation
+author: Rebecca
+date-modified: March 13 2024
+---
+
+## **Study Documentation**
+
+The C4CP study documentation lives in the shared Box drive. A few helpful documents for reference:
+
+- [Manual of Operations and Procedures](https://nih.app.box.com/file/1336123139436)
+
+- [Study Protocols](https://nih.app.box.com/folder/71962335283)
+

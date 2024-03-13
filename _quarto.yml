@@ -71,6 +71,7 @@ website:
              - biospecimen-metrics.qmd
              - operations-metrics.qmd
              - stakeholder-metrics-dashboard.qmd
+             - c4cp-study.qmd
       
       - section: Tutorials
         contents: 
