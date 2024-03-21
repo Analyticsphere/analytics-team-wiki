@@ -80,6 +80,8 @@ website:
           - href: style-guide.qmd
           - href: debugging_docker_container_on_gcp.md
             text: Debug Container on GCP
+          - href: emr-gcs-upload-tutorial.md
+            text: Upload EMR Data to GCS
       
       - section: Training
       
