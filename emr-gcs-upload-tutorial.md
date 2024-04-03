@@ -36,7 +36,7 @@ gcloud auth login
 
 ![](images/gcs-upload-tutorial/login.png)
 
-To ensure that you are logged in correct, enter
+To ensure that you are logged in correctly, enter
 
 ``` bash
 gcloud auth list
