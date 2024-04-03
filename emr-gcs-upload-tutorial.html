@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.551">
+<meta name="generator" content="quarto-1.4.553">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jake Peters">
-<meta name="dcterms.date" content="2024-03-21">
+<meta name="dcterms.date" content="2024-04-03">
 
 <title>c4cp Analytics Team Wiki - Uploading EMR Data to a GCS Bucket</title>
 <style>
@@ -431,7 +431,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 21, 2024</p>
+      <p class="date">April 3, 2024</p>
     </div>
   </div>
   
@@ -475,7 +475,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>To log in, paste the code below in the terminal and hit <code>return</code>. You should be prompted to login in a browser window using your the email/password associated with your google account. If you are prompted with “Google Cloud SDK wants to access your Google Account”, click <code>Allow</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gcloud</span> auth login</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><img src="images/gcs-upload-tutorial/login.png" class="img-fluid"></p>
-<p>To ensure that you are logged in correct, enter</p>
+<p>To ensure that you are logged in correctly, enter</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gcloud</span> auth list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><img src="images/gcs-upload-tutorial/gcloud-auth-list.png" class="img-fluid"></p>
 <p>You should see an asterisk next to the email address associated with your google account. If you have multiple accounts and the desired account is not indicated by the asterisk, you can change the selected account with</p>

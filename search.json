@@ -1,5 +1,16 @@
 [
   {
+    "objectID": "qaqc.html",
+    "href": "qaqc.html",
+    "title": "QAQC",
+    "section": "",
+    "text": "Code Structure\n\n\n\n\n\nflowchart LR\n\n    R[qc_rules_*.xlsx]\n    BQ[(BigQuery)]\n    C[config.yaml]\n    \n    subgraph API[Google Cloud Run \\n plumber_api.R]\n      QC[qaqc.R]\n    end\n    \n    subgraph GCS[Google Cloud Storage]\n      REP[\"qc_report_*_boxfolder_{folderID}.xlsx\"]\n    end\n    \n    subgraph BOX[Box.com]\n      REP2[qc_report_*.xlsx]\n    end\n    \n    subgraph CF[\"Google Cloud Function \\n (event-triggered)\"]\n    end\n    \n    subgraph CS[Google Cloud Scheduler]\n    end\n    \n    CS --trigger--&gt; API\n    C --input--&gt; API\n    R --input--&gt; QC\n    BQ --query--&gt; QC\n    QC --\"output\"--&gt; REP\n    REP --input--&gt; CF\n    CF --\"output\"--&gt; REP2\n    \n    style API fill:#D6EAF8,stroke:black,stroke-width:3px\n    style GCS fill:#D6EAF8,stroke:black,stroke-width:3px\n    style CF fill:#D6EAF8,stroke:black,stroke-width:3px\n    style CS fill:#D6EAF8,stroke:black,stroke-width:3px\n    style BOX fill:#f5cc84,stroke:black,stroke-width:3px",
+    "crumbs": [
+      "Documentation",
+      "QAQC"
+    ]
+  },
+  {
     "objectID": "reporting-pipelines.html",
     "href": "reporting-pipelines.html",
     "title": "Reporting Pipelines",
@@ -8,93 +19,6 @@
     "crumbs": [
       "Documentation",
       "Reporting Pipelines"
-    ]
-  },
-  {
-    "objectID": "emr-gcs-upload-tutorial.html",
-    "href": "emr-gcs-upload-tutorial.html",
-    "title": "Uploading EMR Data to a GCS Bucket",
-    "section": "",
-    "text": "Introduction\nStep-by-step Guide\n\nStep 0: Install gcloud CLI\nStep 1: Login\nStep 2: Set the GCP project\nStep 3: Upload the file to GCS Bucket\n\nReferences",
-    "crumbs": [
-      "Tutorials",
-      "Upload EMR Data to GCS"
-    ]
-  },
-  {
-    "objectID": "emr-gcs-upload-tutorial.html#table-of-contents",
-    "href": "emr-gcs-upload-tutorial.html#table-of-contents",
-    "title": "Uploading EMR Data to a GCS Bucket",
-    "section": "",
-    "text": "Introduction\nStep-by-step Guide\n\nStep 0: Install gcloud CLI\nStep 1: Login\nStep 2: Set the GCP project\nStep 3: Upload the file to GCS Bucket\n\nReferences",
-    "crumbs": [
-      "Tutorials",
-      "Upload EMR Data to GCS"
-    ]
-  },
-  {
-    "objectID": "emr-gcs-upload-tutorial.html#introduction",
-    "href": "emr-gcs-upload-tutorial.html#introduction",
-    "title": "Uploading EMR Data to a GCS Bucket",
-    "section": "Introduction",
-    "text": "Introduction\nThis guide provides detailed instructions on how to upload EMR files to Google Cloud Storage (GCS) using the gcloud CLI. This is the simplest method for uploading files to GCS buckets. However, you can also using REST APIs or Google’s client libraries in Python, C++, Java, Node.js, etcetera.\n\nNote: In order to access the GCS bucket by any of the methods listed above, you must have a Google Account associated with your institutional email address. Provide this email address to the Connect Coordinating Center who will provide you with write permissions for your site’s GCS bucket.",
-    "crumbs": [
-      "Tutorials",
-      "Upload EMR Data to GCS"
-    ]
-  },
-  {
-    "objectID": "emr-gcs-upload-tutorial.html#step-by-step-guide",
-    "href": "emr-gcs-upload-tutorial.html#step-by-step-guide",
-    "title": "Uploading EMR Data to a GCS Bucket",
-    "section": "Step-by-step Guide",
-    "text": "Step-by-step Guide\n\nStep 0: Install gcloud CLI\nThe Google Cloud Command Line Interface (CLI) allows you to interact with Google Cloud services, including Google Cloud Storage, directly from the command line or with scripts. Before using this tool, follow the installation guide here: https://cloud.google.com/sdk/docs/install\n\n\nStep 1: Login\nTo log in, paste the code below in the terminal and hit return. You should be prompted to login in a browser window using your the email/password associated with your google account. If you are prompted with “Google Cloud SDK wants to access your Google Account”, click Allow.\ngcloud auth login\n\nTo ensure that you are logged in correct, enter\ngcloud auth list\n\nYou should see an asterisk next to the email address associated with your google account. If you have multiple accounts and the desired account is not indicated by the asterisk, you can change the selected account with\ngcloud config set account &lt;YOUR_EMAIL_ADDRESS&gt;\n\n\nStep 2: Set the GCP Project.\nSet the Connect GCP Project IDs as environment variables.\nexport CONNECT_DEV=nih-nci-dceg-connect-dev\nexport CONNECT_STG=nih-nci-dceg-connect-prod-6d04\nexport CONNECT_PROD=nih-nci-dceg-connect-prod-5519\nVerify that they are set as expected.\necho $CONNECT_DEV\necho $CONNECT_STG\necho $CONNECT_PROD\nSet the project to using the appropriate environment, e.g., DEV.\ngcloud config set project $CONNECT_DEV\nVerify that your project is set.\ngcloud config get project\n\n\n\nStep 3: Upload file to GCS bucket\nFor convenience set your set your destination bucket and as an environment variable.\nexport CONNECT_GCS_BUCKET=gs://YOUR_SITES_BUCKET/\necho $CONNECT_GCS_BUCKET\nCopy the EMR file from your local filesystem to the GCS bucket.\ngcloud storage cp &lt;PATH/TO/YOUR_EMR_FILE.CSV&gt; $CONNECT_GCS_BUCKET\nEnsure that your file is uploaded to the bucket.\ngcloud storage ls ${CONNECT_GCS_BUCKET}/&lt;YOUR_EMR_FILE.CSV&gt;\nIf your file was successfully uploaded you should see the file listed as output in the terminal.",
-    "crumbs": [
-      "Tutorials",
-      "Upload EMR Data to GCS"
-    ]
-  },
-  {
-    "objectID": "emr-gcs-upload-tutorial.html#references",
-    "href": "emr-gcs-upload-tutorial.html#references",
-    "title": "Uploading EMR Data to a GCS Bucket",
-    "section": "References",
-    "text": "References\n\nhttps://cloud.google.com/sdk/docs/install\nhttps://cloud.google.com/storage/docs/uploading-objects",
-    "crumbs": [
-      "Tutorials",
-      "Upload EMR Data to GCS"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome to the Analytics Team Wiki",
-    "section": "",
-    "text": "Why a wiki?\nThis wiki is intended to gather the wealth of institutional knowledge that we have developed on this team into a persistent resource. This is especially useful for on-boarding new members, training colleagues to cover us while on PTO and for developing some overlapping knowledge across roles. We can also use this wiki to develop shared resources and formalize best practices that we would like to follow on our team as we grow and our work becomes more complex.\n\n\nWho should contribute?\nEveryone!\n\nIf you learn a new skill that could be useful to others, make a minimal tutorial and add it to the wiki!\nIf you create something new that will be part of the project for a while, add a documentation page to the wiki!\nIf you come across a resource that could be valuable to others, add a link to the wiki!\n\n\n\nHow to contribute\nYou can contribute a new page to the wiki in the form of an RMD file, QMD file, an MD file or an ipynb file. They can be easily added to the appropriate section using the _quarto.yml file, which ultimately configures how the site is rendered.\nThe code for this website live in this repo: https://github.com/Analyticsphere/analytics-team-wiki\nPushing commits to the main branch automatically updates the website via GitHub Pages using a GitHub actions workflow from this example:\nhttps://github.com/quarto-dev/quarto-actions/blob/main/examples/example-01-basics.md\nThis is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n\nRules\n\nNever share PII or PHI on this site!\nNever share secret tokens or passwords.\nDo not share links to Box or other resources that do not require authentication.\nWhen in doubt, ask Jake.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "debugging_docker_container_on_gcp.html",
-    "href": "debugging_docker_container_on_gcp.html",
-    "title": "Debugging Docker Container in GCP Cloud Console",
-    "section": "",
-    "text": "Open the Google Cloud Shell in GCP Project \nSet default project:\n\ngcloud config set project &lt;paste-project-id&gt;\n\n\nIn second tab,\n\nOpen Cloud Run\nNavigate to service of interest (e.g., ccc-weekly-report-api)\nClick the REVISIONS tab\nCopy the Image URL from the panel at right \n\nTo pull the docker image in Cloud Shell, type\n\ndocker pull &lt;paste-image-url&gt;\n\n\nTo confirm that the image is loaded, type:\n\ndocker image list\n\n\nIn seperate tab, Navigate to GitHub repo for pipeline and Copy the url. \nTo clone the repo in the Cloud Shell, type:\n\ngit clone &lt;paste-gh-repo-url&gt;\n\nNote that you will be prompted to use your github username and password in order to clone the repo. If your password fails, you will need to use a personal access token instead.  \nExplore the directory with ls and cd commands. You should now be able to see a report.Rmd file, a cloudbuild.yaml file, a Dockerfile, and a plumber_api.R file. The name of the R files will differ from pipeline to pipeline of course.  \nOnce in the directory containing the Dockerfile, type:\n\ndocker build .\n\nto build the container. This may take 5-15 minutes, depending on how many dependencies (e.g., R packages, pandoc) must be loaded. \nTo see the image that was just built, type:\n\ndocker image ls\n\nYou might see the image that was built by cloud build and the one that was just built manually from the github repo. \nThis is unnecessary, but if you would like to keep them straight, you can apply a tag to label them:\n\ndocker tag &lt;image id&gt; &lt;repository_name&gt;:&lt;tag_name&gt;\n\n Note that the one I labeled from_github:current_img is the one that I build directly from the github repo. The one that called gcr.io*:from_cloud_build is the one that Cloud Build produced.\nTo enter the container, type:\n\ndocker run -it --env PORT=8080 /bin/bash &lt;image id&gt;\n\n\nTo execute a script for debugging, enter something like:\n\nRscript -e \"bigrquery::bq_auth()\"\n\n\nRscript -e \"rmarkdown::render('report.Rmd')\"",
-    "crumbs": [
-      "Tutorials",
-      "Debug Container on GCP"
-    ]
-  },
-  {
-    "objectID": "debugging_docker_container_on_gcp.html#tips-tricks",
-    "href": "debugging_docker_container_on_gcp.html#tips-tricks",
-    "title": "Debugging Docker Container in GCP Cloud Console",
-    "section": "Tips & Tricks:",
-    "text": "Tips & Tricks:\n\nGet the latest docker image:\n\nIMAGE_ID=$(docker image ls -q | head -qn1)\n\n\ndocker image ls -q: Lists Docker images and outputs only their IDs.\nhead -qn1: Takes the first line of the output, which corresponds to the ID of the latest image.\nSo, IMAGE_ID will store the ID of the latest Docker image.\n\nRun the latest docker container:\n\ndocker run -it --env PORT=8080 /bin/bash $IMAGE_ID\n\nConsider configuring all of this workflow as a bash script for each pipeline that you would like to debug",
-    "crumbs": [
-      "Tutorials",
-      "Debug Container on GCP"
     ]
   },
   {
@@ -142,13 +66,68 @@
     ]
   },
   {
-    "objectID": "team-roles.html",
-    "href": "team-roles.html",
-    "title": "Team Roles",
+    "objectID": "bq2.html",
+    "href": "bq2.html",
+    "title": "BQ2 Work Flow",
     "section": "",
-    "text": "Current Members\n\nNicole, Lead Analyst:\n\nThe boss\n\nJing\n\n\n\nKelsey\n\n\n\nJake Peters, Data Scientist:\n\nAutomate/maintain reporting pipelines in GCP\nDevelop/maintain flattening workflow for BigQuery tables\nAutomate QAQC workflow\nDevelop/maintain connection from GCP to Box\n\nMadhuri\n\n\n\nRebecca\n\n\n\n\n\n\nPast Members",
+    "text": "Issue Tracker\nProgress on BQ2 is being tracked here: https://github.com/orgs/Analyticsphere/projects/9\n\n\nDiagram\nThis diagram depicts the high-level work flow for generating the BQ2 data.\n\n[Lucid Chart Link]\n\n\n\nRepository\nAll code used for implementing BQ2 will live in this repo: [bq2]\n\n\n\nKey Points:\n\nAll arrows indicate scheduled data transfers or SQL queries\nBQ2 will contain only de-identified data\nThe main BQ2 dataset will have the original Concept IDs from the Data Dictionary (except for derived variables like binned age)\nAll flattening, merging, cleaning and de-identification will occur in BQ1\nDerived materialized views will be used for the Stakeholder Metrics Dashboard (and other similar reports). They will reference the Main BQ2 data set, not the BQ1 data set. This will respect the PII barrier.\n\nWe can discuss this further as a group! Just wanted to jot this down so that we have a common reference.\n\n\nNaming Convention for Loop Variables\nExample: 700889863: Sibling [X]- How old was your [SIBLING INITIALS OR NICKNAME/YOUR SIBLING] when they were first told by a doctor or other health professional that they have or had prostate cancer?\n\n\n\nX\nYear at diagnosis\nAge at diagnosis\n\n\n1\nD_700889863.D_261863326_1\nD_700889863.D_700889863_1\n\n\n2\nD_700889863.D_261863326_2\nD_700889863.D_700889863_2\n\n\n3\nD_700889863.D_261863326_3\nD_700889863.D_700889863_3\n\n\nn\nD_700889863.D_261863326_n\nD_700889863.D_700889863_n",
     "crumbs": [
-      "Team Roles"
+      "Documentation",
+      "BQ2 Work Flow"
+    ]
+  },
+  {
+    "objectID": "debugging_docker_container_on_gcp.html",
+    "href": "debugging_docker_container_on_gcp.html",
+    "title": "Debugging Docker Container in GCP Cloud Console",
+    "section": "",
+    "text": "Open the Google Cloud Shell in GCP Project \nSet default project:\n\ngcloud config set project &lt;paste-project-id&gt;\n\n\nIn second tab,\n\nOpen Cloud Run\nNavigate to service of interest (e.g., ccc-weekly-report-api)\nClick the REVISIONS tab\nCopy the Image URL from the panel at right \n\nTo pull the docker image in Cloud Shell, type\n\ndocker pull &lt;paste-image-url&gt;\n\n\nTo confirm that the image is loaded, type:\n\ndocker image list\n\n\nIn seperate tab, Navigate to GitHub repo for pipeline and Copy the url. \nTo clone the repo in the Cloud Shell, type:\n\ngit clone &lt;paste-gh-repo-url&gt;\n\nNote that you will be prompted to use your github username and password in order to clone the repo. If your password fails, you will need to use a personal access token instead.  \nExplore the directory with ls and cd commands. You should now be able to see a report.Rmd file, a cloudbuild.yaml file, a Dockerfile, and a plumber_api.R file. The name of the R files will differ from pipeline to pipeline of course.  \nOnce in the directory containing the Dockerfile, type:\n\ndocker build .\n\nto build the container. This may take 5-15 minutes, depending on how many dependencies (e.g., R packages, pandoc) must be loaded. \nTo see the image that was just built, type:\n\ndocker image ls\n\nYou might see the image that was built by cloud build and the one that was just built manually from the github repo. \nThis is unnecessary, but if you would like to keep them straight, you can apply a tag to label them:\n\ndocker tag &lt;image id&gt; &lt;repository_name&gt;:&lt;tag_name&gt;\n\n Note that the one I labeled from_github:current_img is the one that I build directly from the github repo. The one that called gcr.io*:from_cloud_build is the one that Cloud Build produced.\nTo enter the container, type:\n\ndocker run -it --env PORT=8080 /bin/bash &lt;image id&gt;\n\n\nTo execute a script for debugging, enter something like:\n\nRscript -e \"bigrquery::bq_auth()\"\n\n\nRscript -e \"rmarkdown::render('report.Rmd')\"",
+    "crumbs": [
+      "Tutorials",
+      "Debug Container on GCP"
+    ]
+  },
+  {
+    "objectID": "debugging_docker_container_on_gcp.html#tips-tricks",
+    "href": "debugging_docker_container_on_gcp.html#tips-tricks",
+    "title": "Debugging Docker Container in GCP Cloud Console",
+    "section": "Tips & Tricks:",
+    "text": "Tips & Tricks:\n\nGet the latest docker image:\n\nIMAGE_ID=$(docker image ls -q | head -qn1)\n\n\ndocker image ls -q: Lists Docker images and outputs only their IDs.\nhead -qn1: Takes the first line of the output, which corresponds to the ID of the latest image.\nSo, IMAGE_ID will store the ID of the latest Docker image.\n\nRun the latest docker container:\n\ndocker run -it --env PORT=8080 /bin/bash $IMAGE_ID\n\nConsider configuring all of this workflow as a bash script for each pipeline that you would like to debug",
+    "crumbs": [
+      "Tutorials",
+      "Debug Container on GCP"
+    ]
+  },
+  {
+    "objectID": "c4cp-study.html",
+    "href": "c4cp-study.html",
+    "title": "Connect for Cancer Prevention Study Documentation",
+    "section": "",
+    "text": "The C4CP study documentation lives in the shared Box drive. A few helpful documents for reference:\n\nManual of Operations and Procedures\nStudy Protocols",
+    "crumbs": [
+      "Documentation",
+      "Connect for Cancer Prevention Study Documentation"
+    ]
+  },
+  {
+    "objectID": "c4cp-study.html#study-documentation",
+    "href": "c4cp-study.html#study-documentation",
+    "title": "Connect for Cancer Prevention Study Documentation",
+    "section": "",
+    "text": "The C4CP study documentation lives in the shared Box drive. A few helpful documents for reference:\n\nManual of Operations and Procedures\nStudy Protocols",
+    "crumbs": [
+      "Documentation",
+      "Connect for Cancer Prevention Study Documentation"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome to the Analytics Team Wiki",
+    "section": "",
+    "text": "Why a wiki?\nThis wiki is intended to gather the wealth of institutional knowledge that we have developed on this team into a persistent resource. This is especially useful for on-boarding new members, training colleagues to cover us while on PTO and for developing some overlapping knowledge across roles. We can also use this wiki to develop shared resources and formalize best practices that we would like to follow on our team as we grow and our work becomes more complex.\n\n\nWho should contribute?\nEveryone!\n\nIf you learn a new skill that could be useful to others, make a minimal tutorial and add it to the wiki!\nIf you create something new that will be part of the project for a while, add a documentation page to the wiki!\nIf you come across a resource that could be valuable to others, add a link to the wiki!\n\n\n\nHow to contribute\nYou can contribute a new page to the wiki in the form of an RMD file, QMD file, an MD file or an ipynb file. They can be easily added to the appropriate section using the _quarto.yml file, which ultimately configures how the site is rendered.\nThe code for this website live in this repo: https://github.com/Analyticsphere/analytics-team-wiki\nPushing commits to the main branch automatically updates the website via GitHub Pages using a GitHub actions workflow from this example:\nhttps://github.com/quarto-dev/quarto-actions/blob/main/examples/example-01-basics.md\nThis is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n\nRules\n\nNever share PII or PHI on this site!\nNever share secret tokens or passwords.\nDo not share links to Box or other resources that do not require authentication.\nWhen in doubt, ask Jake.",
+    "crumbs": [
+      "Home"
     ]
   },
   {
@@ -160,6 +139,105 @@
     "crumbs": [
       "Documentation",
       "Operations Metrics"
+    ]
+  },
+  {
+    "objectID": "stakeholder-metrics-dashboard.html",
+    "href": "stakeholder-metrics-dashboard.html",
+    "title": "Stakeholder Metrics Dashboard",
+    "section": "",
+    "text": "All of the code that generates the stakeholder metrics dashboard is located in: Analyticsphere/stakeholderMetrics",
+    "crumbs": [
+      "Documentation",
+      "Stakeholder Metrics Dashboard"
+    ]
+  },
+  {
+    "objectID": "stakeholder-metrics-dashboard.html#code-location",
+    "href": "stakeholder-metrics-dashboard.html#code-location",
+    "title": "Stakeholder Metrics Dashboard",
+    "section": "",
+    "text": "All of the code that generates the stakeholder metrics dashboard is located in: Analyticsphere/stakeholderMetrics",
+    "crumbs": [
+      "Documentation",
+      "Stakeholder Metrics Dashboard"
+    ]
+  },
+  {
+    "objectID": "stakeholder-metrics-dashboard.html#operation-flow",
+    "href": "stakeholder-metrics-dashboard.html#operation-flow",
+    "title": "Stakeholder Metrics Dashboard",
+    "section": "Operation Flow",
+    "text": "Operation Flow",
+    "crumbs": [
+      "Documentation",
+      "Stakeholder Metrics Dashboard"
+    ]
+  },
+  {
+    "objectID": "stakeholder-metrics-dashboard.html#authentication",
+    "href": "stakeholder-metrics-dashboard.html#authentication",
+    "title": "Stakeholder Metrics Dashboard",
+    "section": "Authentication",
+    "text": "Authentication\nCurrently (10/27), RS and JP are working with George Zaki to implement the auth0 library. Using auth0 will allow us to authenticate users through GCP using their NIH credentials, all through the posit interface that the stakeholders dashboard is hosted on here.\nA few steps that we have had to take in order to make the auth0 library play nicely with the rshiny application:\n\nRegistered the application with GCP, this required Daniels approval and credentials on GCP to complete this step. By registering the app with GCP, we now have a client ID and client secret that will be passed to auth0.\nCreated a json file that looks identical to the yml file that GZ supplied us.\nname: myApp\nremote_url: 'https://appshare-dev.cancer.gov/content/499a6759-6174-495b-8950-7af21faa8a5f'\nauth0_config:\napi_url: https://bigquery.googleapis.com\naccess: token\nrequest: token\nscope: https://www.googleapis.com/auth/bigquery.readonly\ncredentials:\nkey: !expr Sys.getenv(\"AUTH0_CLIENTID\")\nsecret: !expr Sys.getenv(\"AUTH0_SECRET\")\nAssigned the GCP clientID and client secret from the GCP json file to .renvironment variables\n\nmore updates to come as this process continues**",
+    "crumbs": [
+      "Documentation",
+      "Stakeholder Metrics Dashboard"
+    ]
+  },
+  {
+    "objectID": "emr-gcs-upload-tutorial.html",
+    "href": "emr-gcs-upload-tutorial.html",
+    "title": "Uploading EMR Data to a GCS Bucket",
+    "section": "",
+    "text": "Introduction\nStep-by-step Guide\n\nStep 0: Install gcloud CLI\nStep 1: Login\nStep 2: Set the GCP project\nStep 3: Upload the file to GCS Bucket\n\nReferences",
+    "crumbs": [
+      "Tutorials",
+      "Upload EMR Data to GCS"
+    ]
+  },
+  {
+    "objectID": "emr-gcs-upload-tutorial.html#table-of-contents",
+    "href": "emr-gcs-upload-tutorial.html#table-of-contents",
+    "title": "Uploading EMR Data to a GCS Bucket",
+    "section": "",
+    "text": "Introduction\nStep-by-step Guide\n\nStep 0: Install gcloud CLI\nStep 1: Login\nStep 2: Set the GCP project\nStep 3: Upload the file to GCS Bucket\n\nReferences",
+    "crumbs": [
+      "Tutorials",
+      "Upload EMR Data to GCS"
+    ]
+  },
+  {
+    "objectID": "emr-gcs-upload-tutorial.html#introduction",
+    "href": "emr-gcs-upload-tutorial.html#introduction",
+    "title": "Uploading EMR Data to a GCS Bucket",
+    "section": "Introduction",
+    "text": "Introduction\nThis guide provides detailed instructions on how to upload EMR files to Google Cloud Storage (GCS) using the gcloud CLI. This is the simplest method for uploading files to GCS buckets. However, you can also using REST APIs or Google’s client libraries in Python, C++, Java, Node.js, etcetera.\n\nNote: In order to access the GCS bucket by any of the methods listed above, you must have a Google Account associated with your institutional email address. Provide this email address to the Connect Coordinating Center who will provide you with write permissions for your site’s GCS bucket.",
+    "crumbs": [
+      "Tutorials",
+      "Upload EMR Data to GCS"
+    ]
+  },
+  {
+    "objectID": "emr-gcs-upload-tutorial.html#step-by-step-guide",
+    "href": "emr-gcs-upload-tutorial.html#step-by-step-guide",
+    "title": "Uploading EMR Data to a GCS Bucket",
+    "section": "Step-by-step Guide",
+    "text": "Step-by-step Guide\n\nStep 0: Install gcloud CLI\nThe Google Cloud Command Line Interface (CLI) allows you to interact with Google Cloud services, including Google Cloud Storage, directly from the command line or with scripts. Before using this tool, follow the installation guide here: https://cloud.google.com/sdk/docs/install\n\n\nStep 1: Login\nTo log in, paste the code below in the terminal and hit return. You should be prompted to login in a browser window using your the email/password associated with your google account. If you are prompted with “Google Cloud SDK wants to access your Google Account”, click Allow.\ngcloud auth login\n\nTo ensure that you are logged in correctly, enter\ngcloud auth list\n\nYou should see an asterisk next to the email address associated with your google account. If you have multiple accounts and the desired account is not indicated by the asterisk, you can change the selected account with\ngcloud config set account &lt;YOUR_EMAIL_ADDRESS&gt;\n\n\nStep 2: Set the GCP Project.\nSet the Connect GCP Project IDs as environment variables.\nexport CONNECT_DEV=nih-nci-dceg-connect-dev\nexport CONNECT_STG=nih-nci-dceg-connect-prod-6d04\nexport CONNECT_PROD=nih-nci-dceg-connect-prod-5519\nVerify that they are set as expected.\necho $CONNECT_DEV\necho $CONNECT_STG\necho $CONNECT_PROD\nSet the project to using the appropriate environment, e.g., DEV.\ngcloud config set project $CONNECT_DEV\nVerify that your project is set.\ngcloud config get project\n\n\n\nStep 3: Upload file to GCS bucket\nFor convenience set your set your destination bucket and as an environment variable.\nexport CONNECT_GCS_BUCKET=gs://YOUR_SITES_BUCKET/\necho $CONNECT_GCS_BUCKET\nCopy the EMR file from your local filesystem to the GCS bucket.\ngcloud storage cp &lt;PATH/TO/YOUR_EMR_FILE.CSV&gt; $CONNECT_GCS_BUCKET\nEnsure that your file is uploaded to the bucket.\ngcloud storage ls ${CONNECT_GCS_BUCKET}/&lt;YOUR_EMR_FILE.CSV&gt;\nIf your file was successfully uploaded you should see the file listed as output in the terminal.",
+    "crumbs": [
+      "Tutorials",
+      "Upload EMR Data to GCS"
+    ]
+  },
+  {
+    "objectID": "emr-gcs-upload-tutorial.html#references",
+    "href": "emr-gcs-upload-tutorial.html#references",
+    "title": "Uploading EMR Data to a GCS Bucket",
+    "section": "References",
+    "text": "References\n\nhttps://cloud.google.com/sdk/docs/install\nhttps://cloud.google.com/storage/docs/uploading-objects",
+    "crumbs": [
+      "Tutorials",
+      "Upload EMR Data to GCS"
     ]
   },
   {
@@ -262,91 +340,13 @@
     ]
   },
   {
-    "objectID": "stakeholder-metrics-dashboard.html",
-    "href": "stakeholder-metrics-dashboard.html",
-    "title": "Stakeholder Metrics Dashboard",
+    "objectID": "team-roles.html",
+    "href": "team-roles.html",
+    "title": "Team Roles",
     "section": "",
-    "text": "All of the code that generates the stakeholder metrics dashboard is located in: Analyticsphere/stakeholderMetrics",
+    "text": "Current Members\n\nNicole, Lead Analyst:\n\nThe boss\n\nJing\n\n\n\nKelsey\n\n\n\nJake Peters, Data Scientist:\n\nAutomate/maintain reporting pipelines in GCP\nDevelop/maintain flattening workflow for BigQuery tables\nAutomate QAQC workflow\nDevelop/maintain connection from GCP to Box\n\nMadhuri\n\n\n\nRebecca\n\n\n\n\n\n\nPast Members",
     "crumbs": [
-      "Documentation",
-      "Stakeholder Metrics Dashboard"
-    ]
-  },
-  {
-    "objectID": "stakeholder-metrics-dashboard.html#code-location",
-    "href": "stakeholder-metrics-dashboard.html#code-location",
-    "title": "Stakeholder Metrics Dashboard",
-    "section": "",
-    "text": "All of the code that generates the stakeholder metrics dashboard is located in: Analyticsphere/stakeholderMetrics",
-    "crumbs": [
-      "Documentation",
-      "Stakeholder Metrics Dashboard"
-    ]
-  },
-  {
-    "objectID": "stakeholder-metrics-dashboard.html#operation-flow",
-    "href": "stakeholder-metrics-dashboard.html#operation-flow",
-    "title": "Stakeholder Metrics Dashboard",
-    "section": "Operation Flow",
-    "text": "Operation Flow",
-    "crumbs": [
-      "Documentation",
-      "Stakeholder Metrics Dashboard"
-    ]
-  },
-  {
-    "objectID": "stakeholder-metrics-dashboard.html#authentication",
-    "href": "stakeholder-metrics-dashboard.html#authentication",
-    "title": "Stakeholder Metrics Dashboard",
-    "section": "Authentication",
-    "text": "Authentication\nCurrently (10/27), RS and JP are working with George Zaki to implement the auth0 library. Using auth0 will allow us to authenticate users through GCP using their NIH credentials, all through the posit interface that the stakeholders dashboard is hosted on here.\nA few steps that we have had to take in order to make the auth0 library play nicely with the rshiny application:\n\nRegistered the application with GCP, this required Daniels approval and credentials on GCP to complete this step. By registering the app with GCP, we now have a client ID and client secret that will be passed to auth0.\nCreated a json file that looks identical to the yml file that GZ supplied us.\nname: myApp\nremote_url: 'https://appshare-dev.cancer.gov/content/499a6759-6174-495b-8950-7af21faa8a5f'\nauth0_config:\napi_url: https://bigquery.googleapis.com\naccess: token\nrequest: token\nscope: https://www.googleapis.com/auth/bigquery.readonly\ncredentials:\nkey: !expr Sys.getenv(\"AUTH0_CLIENTID\")\nsecret: !expr Sys.getenv(\"AUTH0_SECRET\")\nAssigned the GCP clientID and client secret from the GCP json file to .renvironment variables\n\nmore updates to come as this process continues**",
-    "crumbs": [
-      "Documentation",
-      "Stakeholder Metrics Dashboard"
-    ]
-  },
-  {
-    "objectID": "bq2.html",
-    "href": "bq2.html",
-    "title": "BQ2 Work Flow",
-    "section": "",
-    "text": "Issue Tracker\nProgress on BQ2 is being tracked here: https://github.com/orgs/Analyticsphere/projects/9\n\n\nDiagram\nThis diagram depicts the high-level work flow for generating the BQ2 data.\n\n[Lucid Chart Link]\n\n\n\nRepository\nAll code used for implementing BQ2 will live in this repo: [bq2]\n\n\n\nKey Points:\n\nAll arrows indicate scheduled data transfers or SQL queries\nBQ2 will contain only de-identified data\nThe main BQ2 dataset will have the original Concept IDs from the Data Dictionary (except for derived variables like binned age)\nAll flattening, merging, cleaning and de-identification will occur in BQ1\nDerived materialized views will be used for the Stakeholder Metrics Dashboard (and other similar reports). They will reference the Main BQ2 data set, not the BQ1 data set. This will respect the PII barrier.\n\nWe can discuss this further as a group! Just wanted to jot this down so that we have a common reference.\n\n\nNaming Convention for Loop Variables\nExample: 700889863: Sibling [X]- How old was your [SIBLING INITIALS OR NICKNAME/YOUR SIBLING] when they were first told by a doctor or other health professional that they have or had prostate cancer?\n\n\n\nX\nYear at diagnosis\nAge at diagnosis\n\n\n1\nD_700889863.D_261863326_1\nD_700889863.D_700889863_1\n\n\n2\nD_700889863.D_261863326_2\nD_700889863.D_700889863_2\n\n\n3\nD_700889863.D_261863326_3\nD_700889863.D_700889863_3\n\n\nn\nD_700889863.D_261863326_n\nD_700889863.D_700889863_n",
-    "crumbs": [
-      "Documentation",
-      "BQ2 Work Flow"
-    ]
-  },
-  {
-    "objectID": "c4cp-study.html",
-    "href": "c4cp-study.html",
-    "title": "Connect for Cancer Prevention Study Documentation",
-    "section": "",
-    "text": "The C4CP study documentation lives in the shared Box drive. A few helpful documents for reference:\n\nManual of Operations and Procedures\nStudy Protocols",
-    "crumbs": [
-      "Documentation",
-      "Connect for Cancer Prevention Study Documentation"
-    ]
-  },
-  {
-    "objectID": "c4cp-study.html#study-documentation",
-    "href": "c4cp-study.html#study-documentation",
-    "title": "Connect for Cancer Prevention Study Documentation",
-    "section": "",
-    "text": "The C4CP study documentation lives in the shared Box drive. A few helpful documents for reference:\n\nManual of Operations and Procedures\nStudy Protocols",
-    "crumbs": [
-      "Documentation",
-      "Connect for Cancer Prevention Study Documentation"
-    ]
-  },
-  {
-    "objectID": "qaqc.html",
-    "href": "qaqc.html",
-    "title": "QAQC",
-    "section": "",
-    "text": "Code Structure\n\n\n\n\n\nflowchart LR\n\n    R[qc_rules_*.xlsx]\n    BQ[(BigQuery)]\n    C[config.yaml]\n    \n    subgraph API[Google Cloud Run \\n plumber_api.R]\n      QC[qaqc.R]\n    end\n    \n    subgraph GCS[Google Cloud Storage]\n      REP[\"qc_report_*_boxfolder_{folderID}.xlsx\"]\n    end\n    \n    subgraph BOX[Box.com]\n      REP2[qc_report_*.xlsx]\n    end\n    \n    subgraph CF[\"Google Cloud Function \\n (event-triggered)\"]\n    end\n    \n    subgraph CS[Google Cloud Scheduler]\n    end\n    \n    CS --trigger--&gt; API\n    C --input--&gt; API\n    R --input--&gt; QC\n    BQ --query--&gt; QC\n    QC --\"output\"--&gt; REP\n    REP --input--&gt; CF\n    CF --\"output\"--&gt; REP2\n    \n    style API fill:#D6EAF8,stroke:black,stroke-width:3px\n    style GCS fill:#D6EAF8,stroke:black,stroke-width:3px\n    style CF fill:#D6EAF8,stroke:black,stroke-width:3px\n    style CS fill:#D6EAF8,stroke:black,stroke-width:3px\n    style BOX fill:#f5cc84,stroke:black,stroke-width:3px",
-    "crumbs": [
-      "Documentation",
-      "QAQC"
+      "Team Roles"
     ]
   }
 ]
