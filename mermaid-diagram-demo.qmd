@@ -1,0 +1,170 @@
+---
+title: "Mermaid Diagrams Demo"
+author: "Jake Peters"
+date-modified: today 
+---
+
+## Objective
+
+The objectives of a scripted diagram in `mermaid` are to:
+
+-   eliminate the time spent formatting diagrams
+
+-   generate a reusable, reproducible figures w/ version control
+
+-   provide graphic documentation that lives with your code
+
+::: callout-tip
+Mermaid is for making quick diagrams! Not pretty diagrams! Don't waste your time.
+:::
+
+## Examples
+
+### 3. Simple Scripted Diagram
+
+``` mermaid
+flowchart LR
+
+  A[Develop] --> B[Test]
+  B --pass--> C[Pull Request]
+  B --fail--> A
+  C --rejected--> A
+  C --accepted--> D[Merge to Dev]
+```
+
+```{mermaid}
+flowchart LR
+  A[Develop] --> B[Test]
+  B --pass--> C[Pull Request]
+  B --fail--> A
+  C --rejected--> A
+  C --accepted--> D[Merge to Dev]
+  
+```
+
+### 2. Alternative Script
+
+``` mermaid
+flowchart LR
+  
+  D[Develop] 
+  T[Test]
+  PR[Pull Request]
+  MD[Merge to Dev]
+  
+  D --> T
+  T --fail--> D
+  T --pass--> PR
+  PR --rejected--> D
+  PR --accepted--> MD
+```
+
+```{mermaid}
+flowchart LR
+  D[Develop] 
+  T[Test]
+  PR[Pull Request]
+  MD[Merge to Dev]
+  
+  D --> T
+  T --fail--> D
+  T --pass--> PR
+  PR --rejected--> D
+  PR --accepted--> MD
+```
+
+### 3. Subgraphs are useful for more Diagrams
+
+``` mermaid
+flowchart LR
+
+  subgraph LOC [Local Machine]
+    direction LR
+      D[Develop] 
+      T[Test]
+      PR[Pull Request]
+  end
+    
+  subgraph DEV [DEV]
+    direction LR
+      T_DEV[Test]
+      D_DEV[Debug/Develop]
+      PR_DEV[Pull Request]
+  end
+  
+  subgraph STG [STG]
+    direction LR
+      T_STG[TEST]
+      DDD[...]
+  end
+  
+  D --> T
+  T --fail--> D
+  T --pass--> PR
+  PR --rejected--> D
+  
+  PR --accepted--> T_DEV
+  T_DEV --pass--> PR_DEV
+  T_DEV --fail--> D_DEV
+  D_DEV --> T_DEV
+  PR_DEV --rejected--> D_DEV
+  PR_DEV --accepted--> T_STG
+  
+  T_STG --> |...|DDD
+```
+
+```{mermaid}
+flowchart LR
+
+  subgraph LOC [Local Machine]
+    direction LR
+      D[Develop] 
+      T[Test]
+      PR[Pull Request]
+  end
+    
+  subgraph DEV [DEV]
+    direction LR
+      T_DEV[Test]
+      D_DEV[Debug/Develop]
+      PR_DEV[Pull Request]
+  end
+  
+  subgraph STG [STG]
+    direction LR
+      T_STG[TEST]
+      DDD[...]
+  end
+  
+  D --> T
+  T --fail--> D
+  T --pass--> PR
+  PR --rejected--> D
+  
+  PR --accepted--> T_DEV
+  T_DEV --pass--> PR_DEV
+  T_DEV --fail--> D_DEV
+  D_DEV --> T_DEV
+  PR_DEV --rejected--> D_DEV
+  PR_DEV --accepted--> T_STG
+  
+  T_STG --> |...|DDD
+```
+
+::: callout-note
+## Currently \[4/19/24\] the subgraphs look kind of bad in Quarto with the default formatting. However, they look fine in \`README.md\` files in GitHub.
+:::
+
+## Check out these Links for More
+
+-   Flow Charts: <https://mermaid.js.org/syntax/flowchart.html>
+
+-   Entity Relationship Diagrams: <https://mermaid.js.org/syntax/entityRelationshipDiagram.html>
+
+-   Use Mermaid in GitHub (easy peasy): <https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/>
+
+-   Live Editor: <https://mermaid.live/>
+
+-   Use Mermaid in Quarto: <https://quarto.org/docs/authoring/diagrams.html>
+
+-   Example of use in the wild: <https://github.com/Analyticsphere/bq2/blob/main/README.md>

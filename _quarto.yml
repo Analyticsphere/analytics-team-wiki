@@ -82,6 +82,8 @@ website:
             text: Debug Container on GCP
           - href: emr-gcs-upload-tutorial.md
             text: Upload EMR Data to GCS
+          - href: mermaid-diagram-demo.qmd
+            text: Mermaid Diagram Demo
       
       - section: Training
       
