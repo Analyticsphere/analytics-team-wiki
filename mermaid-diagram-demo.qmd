@@ -6,11 +6,11 @@ date-modified: today
 
 ## Objective
 
-The objectives of a scripted diagram in `mermaid` are to:
+The objectives of scripted diagrams in `mermaid` are to:
 
--   eliminate the time spent formatting diagrams
+-   eliminate the time spent formatting
 
--   generate a reusable, reproducible figures w/ version control
+-   generate reusable, reproducible figures w/ version control
 
 -   provide graphic documentation that lives with your code
 
@@ -20,7 +20,7 @@ Mermaid is for making quick diagrams! Not pretty diagrams! Don't waste your time
 
 ## Examples
 
-### 1. Simple Scripted Diagram
+### 1. Simple scripted diagram
 
 ``` mermaid
 flowchart LR
@@ -42,7 +42,7 @@ flowchart LR
   
 ```
 
-### 2. Alternative Script
+### 2. Alternative script
 
 ``` mermaid
 flowchart LR
