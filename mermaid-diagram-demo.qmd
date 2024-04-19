@@ -20,7 +20,7 @@ Mermaid is for making quick diagrams! Not pretty diagrams! Don't waste your time
 
 ## Examples
 
-### 3. Simple Scripted Diagram
+### 1. Simple Scripted Diagram
 
 ``` mermaid
 flowchart LR
