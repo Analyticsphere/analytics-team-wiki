@@ -8,7 +8,7 @@
 
 <meta name="author" content="Jake Peters">
 
-<title>c4cp Analytics Team Wiki - Delivery of Site Data to Box</title>
+<title>c4cp Analytics Team Wiki - Mermaid Diagrams Demo</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -66,6 +66,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="styles.css">
@@ -178,7 +181,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./bq2.html">Documentation</a></li><li class="breadcrumb-item"><a href="./delivery-of-site-data-to-box.html">Delivery of Site Data to Box</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./contributing-to-github.html">Tutorials</a></li><li class="breadcrumb-item"><a href="./mermaid-diagram-demo.html">Mermaid Diagram Demo</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -262,7 +265,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./delivery-of-site-data-to-box.html" class="sidebar-item-text sidebar-link active">
+  <a href="./delivery-of-site-data-to-box.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Delivery of Site Data to Box</span></a>
   </div>
 </li>
@@ -339,7 +342,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./mermaid-diagram-demo.html" class="sidebar-item-text sidebar-link">
+  <a href="./mermaid-diagram-demo.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Mermaid Diagram Demo</span></a>
   </div>
 </li>
@@ -363,14 +366,27 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#objective" id="toc-objective" class="nav-link active" data-scroll-target="#objective">Objective</a></li>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a>
+  <ul class="collapse">
+  <li><a href="#simple-scripted-diagram" id="toc-simple-scripted-diagram" class="nav-link" data-scroll-target="#simple-scripted-diagram">3. Simple Scripted Diagram</a></li>
+  <li><a href="#alternative-script" id="toc-alternative-script" class="nav-link" data-scroll-target="#alternative-script">2. Alternative Script</a></li>
+  <li><a href="#subgraphs-are-useful-for-more-diagrams" id="toc-subgraphs-are-useful-for-more-diagrams" class="nav-link" data-scroll-target="#subgraphs-are-useful-for-more-diagrams">3. Subgraphs are useful for more Diagrams</a></li>
+  </ul></li>
+  <li><a href="#check-out-these-links-for-more" id="toc-check-out-these-links-for-more" class="nav-link" data-scroll-target="#check-out-these-links-for-more">Check out these Links for More</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./bq2.html">Documentation</a></li><li class="breadcrumb-item"><a href="./delivery-of-site-data-to-box.html">Delivery of Site Data to Box</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./contributing-to-github.html">Tutorials</a></li><li class="breadcrumb-item"><a href="./mermaid-diagram-demo.html">Mermaid Diagram Demo</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Delivery of Site Data to Box</h1>
+<h1 class="title">Mermaid Diagrams Demo</h1>
 </div>
 
 
@@ -388,7 +404,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 27, 2023</p>
+      <p class="date-modified">April 19, 2024</p>
     </div>
   </div>
     
@@ -399,9 +415,206 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><img src="images/deidentified-site-data-box-delivery-diagram.png" class="img-fluid"></p>
+<section id="objective" class="level2">
+<h2 class="anchored" data-anchor-id="objective">Objective</h2>
+<p>The objectives of a scripted diagram in <code>mermaid</code> are to:</p>
+<ul>
+<li><p>eliminate the time spent formatting diagrams</p></li>
+<li><p>generate a reusable, reproducible figures w/ version control</p></li>
+<li><p>provide graphic documentation that lives with your code</p></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Mermaid is for making quick diagrams! Not pretty diagrams! Don’t waste your time.</p>
+</div>
+</div>
+</section>
+<section id="examples" class="level2">
+<h2 class="anchored" data-anchor-id="examples">Examples</h2>
+<section id="simple-scripted-diagram" class="level3">
+<h3 class="anchored" data-anchor-id="simple-scripted-diagram">3. Simple Scripted Diagram</h3>
+<pre class="mermaid"><code>flowchart LR
+
+  A[Develop] --&gt; B[Test]
+  B --pass--&gt; C[Pull Request]
+  B --fail--&gt; A
+  C --rejected--&gt; A
+  C --accepted--&gt; D[Merge to Dev]</code></pre>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A[Develop] --&gt; B[Test]
+  B --pass--&gt; C[Pull Request]
+  B --fail--&gt; A
+  C --rejected--&gt; A
+  C --accepted--&gt; D[Merge to Dev]
+  
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="alternative-script" class="level3">
+<h3 class="anchored" data-anchor-id="alternative-script">2. Alternative Script</h3>
+<pre class="mermaid"><code>flowchart LR
+  
+  D[Develop] 
+  T[Test]
+  PR[Pull Request]
+  MD[Merge to Dev]
+  
+  D --&gt; T
+  T --fail--&gt; D
+  T --pass--&gt; PR
+  PR --rejected--&gt; D
+  PR --accepted--&gt; MD</code></pre>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  D[Develop] 
+  T[Test]
+  PR[Pull Request]
+  MD[Merge to Dev]
+  
+  D --&gt; T
+  T --fail--&gt; D
+  T --pass--&gt; PR
+  PR --rejected--&gt; D
+  PR --accepted--&gt; MD
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="subgraphs-are-useful-for-more-diagrams" class="level3">
+<h3 class="anchored" data-anchor-id="subgraphs-are-useful-for-more-diagrams">3. Subgraphs are useful for more Diagrams</h3>
+<pre class="mermaid"><code>flowchart LR
+
+  subgraph LOC [Local Machine]
+    direction LR
+      D[Develop] 
+      T[Test]
+      PR[Pull Request]
+  end
+    
+  subgraph DEV [DEV]
+    direction LR
+      T_DEV[Test]
+      D_DEV[Debug/Develop]
+      PR_DEV[Pull Request]
+  end
+  
+  subgraph STG [STG]
+    direction LR
+      T_STG[TEST]
+      DDD[...]
+  end
+  
+  D --&gt; T
+  T --fail--&gt; D
+  T --pass--&gt; PR
+  PR --rejected--&gt; D
+  
+  PR --accepted--&gt; T_DEV
+  T_DEV --pass--&gt; PR_DEV
+  T_DEV --fail--&gt; D_DEV
+  D_DEV --&gt; T_DEV
+  PR_DEV --rejected--&gt; D_DEV
+  PR_DEV --accepted--&gt; T_STG
+  
+  T_STG --&gt; |...|DDD</code></pre>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+
+  subgraph LOC [Local Machine]
+    direction LR
+      D[Develop] 
+      T[Test]
+      PR[Pull Request]
+  end
+    
+  subgraph DEV [DEV]
+    direction LR
+      T_DEV[Test]
+      D_DEV[Debug/Develop]
+      PR_DEV[Pull Request]
+  end
+  
+  subgraph STG [STG]
+    direction LR
+      T_STG[TEST]
+      DDD[...]
+  end
+  
+  D --&gt; T
+  T --fail--&gt; D
+  T --pass--&gt; PR
+  PR --rejected--&gt; D
+  
+  PR --accepted--&gt; T_DEV
+  T_DEV --pass--&gt; PR_DEV
+  T_DEV --fail--&gt; D_DEV
+  D_DEV --&gt; T_DEV
+  PR_DEV --rejected--&gt; D_DEV
+  PR_DEV --accepted--&gt; T_STG
+  
+  T_STG --&gt; |...|DDD
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Currently [4/19/24] the subgraphs look kind of bad in Quarto with the default formatting. However, they look fine in `README.md` files in GitHub.
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+</section>
+</section>
+<section id="check-out-these-links-for-more" class="level2">
+<h2 class="anchored" data-anchor-id="check-out-these-links-for-more">Check out these Links for More</h2>
+<ul>
+<li><p>Flow Charts: <a href="https://mermaid.js.org/syntax/flowchart.html" class="uri">https://mermaid.js.org/syntax/flowchart.html</a></p></li>
+<li><p>Entity Relationship Diagrams: <a href="https://mermaid.js.org/syntax/entityRelationshipDiagram.html" class="uri">https://mermaid.js.org/syntax/entityRelationshipDiagram.html</a></p></li>
+<li><p>Use Mermaid in GitHub (easy peasy): <a href="https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/" class="uri">https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/</a></p></li>
+<li><p>Live Editor: <a href="https://mermaid.live/" class="uri">https://mermaid.live/</a></p></li>
+<li><p>Use Mermaid in Quarto: <a href="https://quarto.org/docs/authoring/diagrams.html" class="uri">https://quarto.org/docs/authoring/diagrams.html</a></p></li>
+<li><p>Example of use in the wild: <a href="https://github.com/Analyticsphere/bq2/blob/main/README.md" class="uri">https://github.com/Analyticsphere/bq2/blob/main/README.md</a></p></li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
