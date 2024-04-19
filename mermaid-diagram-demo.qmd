@@ -73,7 +73,7 @@ flowchart LR
   PR --accepted--> MD
 ```
 
-### 3. Subgraphs are useful for more Diagrams
+### 3. Subgraphs are useful for more complex diagrams
 
 ``` mermaid
 flowchart LR
