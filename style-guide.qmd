@@ -3,3 +3,28 @@ title: Style Guide
 author: Jake Peters
 date-modified: Oct. 5, 2023
 ---
+
+# c4cp Analytics Team code style for R
+
+(Adapted from <https://style.tidyverse.org/)>
+
+The [`styler`](https://www.tidyverse.org/blog/2017/12/styler-1.0.0/) package is highly recommended for automatically applying some (but not all) of the style recommendations here. `styler` is available as a stand-alone R package, but also comes with a handy RStudio add-in.
+
+## Naming conventions
+
+We use camel case for variabale names `varaibe_name`
+
+Function names typically start with a verb. Variable names are typically nouns. Do not encode the data type in the variable names. Also, everything is data, so no need to say that unless unavoidable.
+
+**Good**
+
+-   The `fitOutcomeModel` function.
+-   The `computeCovariateBalance` function.
+-   The `population` argument.
+
+**Bad**
+
+-   `sampling` as variable name (not a noun)
+-   `namesVector`, `covariatesDf` (encodes the data type)
+-   `getResultData` (everything is data)
+
