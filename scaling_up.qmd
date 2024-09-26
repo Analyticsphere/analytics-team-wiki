@@ -1,0 +1,79 @@
+---
+title: Analytics Workflow Issues
+subtitle: Challenges with scaling up recruitment.
+Author: Jake Peters
+---
+
+## Data Handling in Reports
+
+#### Problems
+-   Many report scripts load large chunks of data into memory (all rows, many columns)
+-   Transformations, aggregations then performed using local memory and compute resources.
+-   Memory usage can exceed 16 GB leading to slow speeds related to "swap" and "virtual memory"
+-   Unpredictable failures occur when running the report multiple times.
+
+#### Solutions
+-   Use `DBI` library to connect to BigQuery
+-   Construct query and transformations using `dbplyr` (i.e., in BigQuery) prior to loading into memory
+-   When possible perform repeated transformations in SQL and generating materialized views to reference in report scripts
+-   Refactor scripts to leverage functions to avoid accumulating high-memory objects in global scope of script
+
+#### Barriers
+-   Code base is sprawling. 
+-   Scripts have changed hands several times, leading to limited readability.
+-   Analytics team does not have sufficient band-width
+
+###### Pseudocode 
+```r
+# Good
+data <- connect() %>% select() %>% transform() %>% aggregate() %>% download()
+#                 <----------------- BQ ---------------------> <--- local -->
+
+# Bad
+data <- download() %>% select() %>% transform() %>% aggregate() 
+#       <--- BQ ---> <--------------- local ------------------>
+```
+
+## All columns are strings in FlatConnect
+
+#### Problems:
+-   Flattening script uses JSON strings, leading to string output across all rows
+-   Filtering strings may substantially decrease filtering and ordering performance
+
+#### Solutions:
+-   Refactor flattening function to yield original data types, e.g., CIDs as `INT`, time stamps as `DATETIME`
+
+#### Barriers:
+-   Limited understanding of JavaScript transformations involved in unnesting `STRUCT`s
+-   Downstream Analytics code developed assuming strings
+
+
+## Merging modules 
+
+#### Problem
+-   Modules are loaded into R and then merged using local memory/compute
+-   This is slow and can lead to memory issues
+-   R code unnecessarily complex
+
+#### Solution
+-   Merge data via SQL in a materialized view
+-   Reference in downstream reports
+
+#### Barriers
+-   The `Connect` data set is overwritten during each update
+-   Need a persistant schema for materialized view to be stable
+
+## Need a consolidated ETL tool
+
+#### Problem
+-   Scheduled queries/transfers are becoming cumbersome
+-   Micro services live in many different places in GCP and it requires digging or extensive documentation to understand workflow
+
+#### Solution
+-   Use devoted ELT tool like Dataform (a GCP Service)
+-   Consolidates dependencies, offers parameterization, CI/CD, autodocumentation, etc
+
+#### Barrier
+-   Requires service account token to access BigQuery from Dataform
+
+

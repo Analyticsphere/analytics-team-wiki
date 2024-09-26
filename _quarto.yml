@@ -57,7 +57,8 @@ website:
       - href: index.qmd
         text: Home
       - team-roles.qmd
-            
+      - href: scaling_up.qmd
+        text: Analytics Workflow Issues
       - section: Documentation
         contents: 
              - bq2.qmd
