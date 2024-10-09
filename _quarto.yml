@@ -88,9 +88,10 @@ website:
       
       - section: Training
       
-      - section: SOPs
-      
-      - section: Covering for PTO
+      - section: Presentations
+        contents:
+          - dataform.qmd
+        
 
 format:
   html:

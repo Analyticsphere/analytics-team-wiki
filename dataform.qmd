@@ -1,0 +1,170 @@
+---
+title: "Selecting an ELT Tool"
+subtitle: "for the Cancer Cohort Study"
+author: "Jake Peters"
+format: revealjs
+revealjs:
+  theme: simple      # You can change the theme as desired
+  transition: slide  # Options: none, fade, slide, convex, concave, zoom
+  slideNumber: true
+---
+
+## Introduction
+
+-   **Objective**: Enhance data processing for the Cancer Cohort Study.
+-   **Challenge**: Selecting the right ETL/ELT tool for efficient data workflows.
+-   **Tools Under Consideration**:
+    -   Dataform
+    -   Dataflow
+    -   Cloud Composer
+
+------------------------------------------------------------------------
+
+### Dataform
+
+-   **Purpose**: SQL-based data transformations within cloud data warehouses like **BigQuery**.
+-   **Key Features**:
+    -   Focuses on the **Transform** step in ELT.
+    -   Uses modular **SQL** code with dependency management.
+    -   Integrates with **version control systems** (e.g., Git).
+
+------------------------------------------------------------------------
+
+### Dataflow
+
+-   **Purpose**: Custom data processing using **Apache Beam** for batch and streaming data.
+-   **Key Features**:
+    -   Handles complex data processing tasks.
+    -   Supports programming in **Java, Python, and Go**.
+    -   Automatically **scales** resources based on workload.
+
+------------------------------------------------------------------------
+
+### Cloud Composer
+
+-   **Purpose**: Workflow orchestration service built on **Apache Airflow**.
+-   **Key Features**:
+    -   Orchestrates complex workflows and task dependencies.
+    -   Uses **Python-based DAGs** (Directed Acyclic Graphs).
+    -   Integrates with various **GCP services**.
+
+------------------------------------------------------------------------
+
+### Comparing the Tools
+
+::: {style="font-size: 0.75em; line-height: 1.1;"}
+| Feature | **Dataform** | **Cloud Composer** | **Dataflow** |
+|------------------|------------------|------------------|-------------------|
+| **Primary Use** | SQL-based transformations | Workflow orchestration | Custom data processing |
+| **Ease of Use** | High (SQL users) | Moderate (Python required) | Moderate to Low |
+| **Language Support** | **SQL** | Python (for orchestration) | Java, Python, Go |
+| **Integration w/ R** | **Yes** (via **DBI** & **dbplyr**) | **Possible** (can run R scripts via operators) | **Limited** |
+| **Team Alignment** | Team uses **R** & **SQL** | Team uses **R** (Python needed) | Team uses **R** (new languages needed) |
+| **Best For** | Transforming data in BigQuery | Managing workflows | Complex, real-time processing |
+:::
+
+------------------------------------------------------------------------
+
+### Leveraging R with Dataform
+
+-   **Bridging R and SQL**:
+    -   Use `DBI` and `dbplyr` packages in **R** to develop and render **SQL** transformations.
+    -   Write data transformation logic in R then translate to SQL.
+-   **Workflow**:
+    1.  **Develop** transformation logic in R using `dbplyr`.
+    2.  **Render** the SQL code from R.
+    3.  **Implement** the SQL code in Dataform for execution in BigQuery.
+
+------------------------------------------------------------------------
+
+### Why Dataform Is the Best Fit
+
+-   **Alignment with Team Skills:** Team excels in *R* and *SQL*
+
+-   **Efficiency:** Leverages *BigQuery*, reduces reliance on containerized R scripts
+
+-   **Version Control:** Integrates with *GitHub*
+
+-   **Documentation:** Auto-generates documentation for data models
+
+-   **Data Quality:** Built-in data quality checks
+
+------------------------------------------------------------------------
+
+### Additional Notes
+
+-   **Why Using DBI and dbplyr Matters**:
+    -   **DBI**: A database interface that allows R to communicate with databases like BigQuery.
+    -   **dbplyr**: Enables writing `dplyr` code that translates into SQL, allowing us to use R syntax to define transformations.
+    -   **Advantage**: Write transformations in R, generate efficient SQL, and execute them in Dataform.
+
+------------------------------------------------------------------------
+
+### Example Workflow In RStudio
+
+```{r, echo=TRUE, results='hide', message=FALSE, warning=FALSE}
+lapply(c("dplyr","dbplyr","DBI","bigrquery"), library, character.only=T)
+
+project <- "nih-nci-dceg-connect-dev" 
+billing <- "bigquery-public-data"
+
+# Connect to BigQuery & reference table
+bq_auth()  
+con <- dbConnect(bigrquery::bigquery(), project=project, billing= project)
+tbl <- tbl(con, "bigquery-public-data.samples.shakespeare")
+
+#  Get top 10 most frequently used words across Shakespeare's works.
+top_words <- tbl %>%
+  group_by(word) %>%
+  summarise(total_count = sum(word_count)) %>%
+  arrange(desc(total_count)) %>%
+  ungroup() %>%
+  head(10)
+```
+
+------------------------------------------------------------------------
+
+### Results
+
+:::::: {style="font-size: 0.95em;"}
+::::: columns
+::: {.column width="50%"}
+#### View Data
+
+```{r, echo=TRUE, warning=FALSE}
+top_words %>% print()
+```
+:::
+
+::: {.column width="50%"}
+#### Render SQL
+
+```{r, echo=TRUE, warning=FALSE}
+top_words %>% show_query()
+```
+:::
+:::::
+::::::
+
+------------------------------------------------------------------------
+
+## Lazy operation
+
+::: callout-tip
+Developing queries in `dbplyr`leverage BigQuery's memory and compute resources rather, not your laptop's!
+:::
+
+```{r, echo=TRUE}
+# Top words is a reference to a temporary table in BigQuery
+class(top_words)
+```
+
+
+
+```{r, echo=TRUE}
+# Only when using collect() does the table download to memory
+top_words_df <- top_words %>% collect()
+class(top_words_df)
+```
+
+
