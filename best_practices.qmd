@@ -1,0 +1,16 @@
+---
+title: "best_practices"
+author: "Jake Peters"
+---
+
+### Style Guide
+
+<https://style.tidyverse.org/functions.html>
+
+### Building reproducible analytical pipelines with R
+
+<https://raps-with-r.dev/>
+
+### GitHub Course
+
+<https://www.coursera.org/learn/introduction-git-github>
